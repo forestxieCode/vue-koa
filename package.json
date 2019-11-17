@@ -1,0 +1,35 @@
+{
+  "name": "vue-koa",
+  "version": "1.0.0",
+  "description": "My primo Nuxt.js project",
+  "author": "Forest_Xie",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
+    "build": "nuxt build",
+    "start": "cross-env NODE_ENV=production node server/index.js",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "cross-env": "^5.2.0",
+    "element-ui": "^2.4.11",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.6.2",
+    "koa-bodyparser": "^4.2.1",
+    "koa-generic-session": "^2.0.1",
+    "koa-json": "^2.0.2",
+    "koa-logger": "^3.2.1",
+    "koa-onerror": "^4.1.0",
+    "koa-redis": "^4.0.0",
+    "koa-router": "^7.4.0",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
+    "mongoose": "^5.7.11",
+    "nodemailer": "^6.3.1",
+    "nuxt": "^2.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}
