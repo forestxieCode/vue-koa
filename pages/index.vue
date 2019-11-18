@@ -12,7 +12,7 @@
 
          <div class="ContantSpanBetween">
           <el-checkbox v-model="isAutoLoign">自动登入</el-checkbox>
-          <nuxt-link to="/">忘记密码</nuxt-link> 
+          <nuxt-link to="/">忘记密码</nuxt-link>
         </div>
         <el-form-item>
           <el-button type="primary" @click="loginHnadle('login_form')" style="width:100%;">登入</el-button>
@@ -20,7 +20,7 @@
 
         <div class="ContantSpanBetween">
           <span>其他方式登入</span>
-          <nuxt-link to="/register">注册账号</nuxt-link> 
+          <nuxt-link to="/register">注册账号</nuxt-link>
         </div>
 
       </el-form>
@@ -33,7 +33,7 @@ import { mapMutations } from 'vuex'
 import { login } from '~/api/users'
 export default {
   asyncData (){
-    
+
   },
   data(){
     return {
@@ -65,6 +65,7 @@ export default {
            const { username , token } = res
            this.saveUserInfo({username,token})
            this.$message.success(res.msg)
+           this.$router.push('\home')
          }
       });
     }
