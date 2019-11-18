@@ -1,13 +1,13 @@
 <template>
   <el-container class="login">
    <section class="login_container">
-     <header>Login For</header>
+     <header>用户登入</header>
      <el-form :model="login_form" status-icon :rules="login_rules" ref="login_form" label-width="0" class="login_Form">
         <el-form-item prop="username">
-          <el-input type="username" v-model="login_form.username" auto-complete="off" placeholder="请输入用户名或邮箱" prefix-icon="el-icon-user"></el-input>
+          <el-input type="username" v-model="login_form.username" auto-complete="off" placeholder="请输入账号邮箱" prefix-icon="el-icon-user" clearable></el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input type="password" v-model="login_form.password" auto-complete="off"  placeholder="请输入账号密码"  prefix-icon="el-icon-lock"></el-input>
+          <el-input type="password" v-model="login_form.password" auto-complete="off"  placeholder="请输入账号密码"  prefix-icon="el-icon-lock" clearable></el-input>
         </el-form-item>
 
          <div class="ContantSpanBetween">
@@ -15,7 +15,7 @@
           <nuxt-link to="/">忘记密码</nuxt-link> 
         </div>
         <el-form-item>
-          <el-button type="primary" @click="login('login_form')" style="width:100%;">登入</el-button>
+          <el-button type="primary" @click="loginHnadle('login_form')" style="width:100%;">登入</el-button>
         </el-form-item>
 
         <div class="ContantSpanBetween">
@@ -29,12 +29,11 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { mapMutations } from 'vuex'
+import { login } from '~/api/users'
 export default {
   asyncData (){
-    axios.get('/api/json').then(res=>{
-      console.log(res)
-    })
+    
   },
   data(){
     return {
@@ -42,13 +41,32 @@ export default {
         username:'',
         password:''
       },
-      login_rules:{},
+      login_rules:{
+        username:[
+          { required: true, message: '请输入账号邮箱', trigger: 'blur' }
+        ],
+        password:[
+          { required: true, message: '请输入账号密码', trigger: 'blur' }
+        ]
+      },
       isAutoLoign:false
     }
   },
-  methods:{
-    login(){
 
+  methods:{
+     ...mapMutations([
+        'saveUserInfo'
+    ]),
+     loginHnadle(formName){
+       this.$refs[formName].validate(async (valid) => {
+         if (!valid) return
+         let res = await login(this.login_form)
+         if(res.code===0){
+           const { username , token } = res
+           this.saveUserInfo({username,token})
+           this.$message.success(res.msg)
+         }
+      });
     }
   }
 }

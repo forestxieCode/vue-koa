@@ -19,7 +19,7 @@ const smtp = {
     return '1397798719@qq.com' // qq邮箱名
   },
   get pass() {
-    return 'khbjlphutmkhgahc' // qq邮箱授权码
+    return 'yypeobwvxucsifjb' // qq邮箱授权码
   },
   // 生成邮箱验证码
   get code() {

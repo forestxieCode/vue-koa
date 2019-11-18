@@ -4,22 +4,22 @@
      <header>注册新账号</header>
      <el-form :model="register_form" status-icon :rules="register_rules" ref="register_form" label-width="0" class="register_Form">
         <el-form-item prop="username">
-          <el-input type="text" v-model="register_form.username" auto-complete="off" placeholder="请输入注册账号" ></el-input>
+          <el-input type="text" v-model="register_form.username" auto-complete="off" placeholder="请输入注册账号" clearable></el-input>
         </el-form-item>
         <el-form-item prop="email">
-          <el-input type="email" v-model="register_form.email" auto-complete="off" placeholder="请输入注册邮箱" ></el-input>
+          <el-input type="email" v-model="register_form.email" auto-complete="off" placeholder="请输入注册邮箱" clearable></el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input type="password" v-model="register_form.password" auto-complete="off"  placeholder="请输入注册密码"></el-input>
+          <el-input type="password" v-model="register_form.password" auto-complete="off"  placeholder="请输入注册密码" clearable></el-input>
         </el-form-item>
         <el-form-item prop="repassword">
-          <el-input type="password" v-model="register_form.repassword" auto-complete="off"  placeholder="请确认注册密码"></el-input>
+          <el-input type="password" v-model="register_form.repassword" auto-complete="off"  placeholder="请确认注册密码" clearable></el-input>
         </el-form-item>
 
         <el-form-item prop="code" >
            <div class="ContantSpanBetween">
-            <el-input type="code" v-model="register_form.code" auto-complete="off"  placeholder="请输入验证码" style="width:68%;"></el-input>
-            <el-button type="primary" @click="sendCode" style="width:30%;" :loading="isLoading">获取验证码</el-button>
+            <el-input type="code" v-model="register_form.code" auto-complete="off"  placeholder="请输入验证码" style="width:60%;"></el-input>
+            <el-button type="primary" @click="sendCode" style="width:36%;" :loading="isLoading" :disabled="isDisabled">获取验证码</el-button>
            </div>
         </el-form-item>
 
@@ -36,9 +36,42 @@
 
 <script>
 import axios from 'axios'
+import { sendVerify , register } from '~/api/users.js'
 export default {
   layout:"default",
   data(){
+    const validaterePass= (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请再次输入密码'));
+      } else if (value !== this.register_form.password) {
+        callback(new Error('两次输入密码不一致!'));
+      } else {
+        callback();
+      }
+    };
+
+    const validateEmail= (rule, value, callback) => {
+      var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+      if (value === '') {
+        callback(new Error('请输入邮箱'));
+      } else if (!reg.test(value)) {
+        callback(new Error('邮箱格式不对'));
+      } else{
+        callback();
+      }
+    };
+
+     const validatePass= (rule, value, callback) => {
+      var reg = /^(\w){6,20}$/; ;
+      if (value === '') {
+        callback(new Error('请注册密码'));
+      } else if (!reg.test(value)) {
+        callback(new Error('请输入数字英文混合的密码'));
+      } else{
+        callback();
+      }
+    };
+
     return {
       register_form:{
         email:'',
@@ -48,25 +81,56 @@ export default {
         code:''
       },
       register_rules:{
-
+        username:[
+          { required: true, message: '请输入用户名', trigger: 'blur' }
+        ],
+        email:[
+          { validator: validateEmail, trigger: 'blur' }
+        ],
+        password: [
+          { validator: validatePass, trigger: 'blur' }
+        ],
+        repassword: [
+          { validator: validaterePass, trigger: 'blur' }
+        ],
       },
       isLoading:false
+    }
+  },
+  computed:{
+    isDisabled(){
+      var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+      if(this.register_form.username!==''&&this.register_form.email!==''&&reg.test(this.register_form.email)){
+        return false
+      }else {
+        return true
+      }
     }
   },
   methods:{
     register(formName){
       this.$refs[formName].validate((valid) => {
-        delete this.register_form.repassword
-         if (!valid) return false
-          axios.post('/api/register',this.register_form).then(res=>{
-            console.log(res)
+         let request = {...this.register_form}
+         delete request.repassword
+         if (!valid) return
+         register(request).then(res=>{
+            if(res.code===0){
+              this.$message.success(res.msg)
+              setTimeout(()=>{
+                 this.$router.push('/')
+              },200)
+            }
           })
       });
     },
     sendCode(){
       this.isLoading = true
-      axios.post('/api/verify',{username:this.register_form.username,email:this.register_form.email}).then(res=>{
-        console.log(res)
+      sendVerify({username:this.register_form.username,email:this.register_form.email}).then(res=>{
+        if(res.code===0){
+          this.$message.success(res.msg)
+        }else {
+          this.$message.success('验证码发送失败，请重新发送')
+        }
       })
     }
   }

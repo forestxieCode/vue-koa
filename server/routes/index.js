@@ -51,7 +51,8 @@ router.post('/verify', async (ctx, next) => {
       pass: Email.smtp.pass
     }
   })
-
+  
+  console.log('info:',ctx.request.body.email,ctx.request.body.username)
   // 邮箱需要接收的信息
   const ko = {
     code: Email.smtp.code(),
@@ -99,7 +100,7 @@ router.post('/register', async ctx => {
     console.log('过期时间：', saveExpire)
 
     // 用户提交的验证码是否等于已存的验证码
-    if (code === saveCode) {
+    if (code.toLowerCase() === saveCode.toLowerCase()) {
       if (new Date().getTime() - saveExpire > 0) {
         ctx.body = {
           code: -1,
@@ -157,8 +158,10 @@ router.post('/register', async ctx => {
 // 接口 - 登录
 router.post('/login', async (ctx, next) => {
   const { username, password } = ctx.request.body
+  console.log(12,username,password)
 
-  let doc = await User.findOne({ username })
+  let doc = await User.findOne({ "username":username })
+
   if (!doc) { 
     ctx.body = {
       code: -1,
@@ -233,9 +236,6 @@ router.post('/deluser', checkToken, async (ctx, next) => {
   }
 })
 
-router.get('/string', async (ctx, next) => {
-  ctx.body = 'koa2 string'
-})
 
 router.get('/api/json', async (ctx, next) => {
   ctx.body = {
