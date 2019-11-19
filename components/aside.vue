@@ -43,11 +43,6 @@
 
     },
     props: ['isCollapse'],
-    watch:{
-      isCollapse:function(newVal,oldVal){
-        console.log(newVal)
-      }
-    },
     methods: {
       handleOpen(key, keyPath) {
         console.log(key, keyPath);

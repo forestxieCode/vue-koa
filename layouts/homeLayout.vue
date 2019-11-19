@@ -1,6 +1,8 @@
 <template>
   <el-container class="home">
-    <el-aside :style="`width:${isCollapse?'64':'200'}px;`" ><Aside :isCollapse="isCollapse"/></el-aside>
+    <el-aside :style="`width:${isCollapse?'64':'200'}px;`" >
+      <Aside :isCollapse="isCollapse"/>
+    </el-aside>
     <el-container>
       <el-header class="header" style="height:64px;">
         <div :class="{'collect':true,'el-icon-s-fold':!isCollapse,'el-icon-s-unfold':isCollapse}" @click="isCollapse=!isCollapse"></div>
@@ -8,9 +10,20 @@
           <el-badge :value="200" :max="99" class="notice">
             <span class="el-icon-bell"></span>
           </el-badge>
-          <div class="info">
-            <img src="~/assets/img/avtor.jpg" alt="" class="avtoer"> 欢迎 {{username}}
-          </div>
+          <el-popover
+            ref="popover"
+            placement="bottom-start"
+            width="100"
+            popper-class="popover-menu"
+            trigger="hover">
+              <div>
+                <span class="el-icon-switch-button"></span> 退出登入
+              </div>
+            <div class="info" slot="reference">
+              <img src="~/assets/img/avtor.jpg" alt="" class="avtoer"> 欢迎 {{username}}
+            </div>
+          </el-popover>
+         
         </div>
       </el-header>
       <el-main> <nuxt /></el-main>
@@ -77,11 +90,21 @@ html {
       .info{
         line-height: 64px;
         height: 54px;
+        cursor: pointer;
         .avtoer{
           width: 25px;
           height: 25px;
           border-radius: 50%;
           vertical-align: middle;
+        }
+      }
+      .popover-menu{
+        div{
+          cursor: pointer;
+          span{
+            font-size: 30px;
+            margin-right: 10px;
+          }
         }
       }
     }
