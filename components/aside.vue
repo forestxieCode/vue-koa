@@ -3,37 +3,14 @@
     <section class="logo" >
       <h1><span class="el-icon-medal"></span> <span v-if="!isCollapse">Forest Xie</span></h1>
     </section>
-    <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse" :collapse-transition="false"  background-color="#001529"  text-color="hsla(0,0%,100%,.65)" active-text-color="#f5222d">
-      <el-submenu index="1">
+    <el-menu default-active="/dashboard/workplace" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse" :collapse-transition="false"  background-color="#001529"  text-color="hsla(0,0%,100%,.65)" active-text-color="#f5222d">
+      <el-submenu v-for="item in menus" :index="item.path" :key="item.path">
         <template slot="title">
-          <i class="el-icon-location"></i>
-          <span slot="title">导航一</span>
+          <i :class="item.iconClass"></i>
+          <span slot="title">{{item.name}}</span>
         </template>
-        <el-menu-item-group>
-          <span slot="title">分组一</span>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="分组2">
-          <el-menu-item index="1-3">选项3</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="1-4">
-          <span slot="title">选项4</span>
-          <el-menu-item index="1-4-1">选项1</el-menu-item>
-        </el-submenu>
+        <el-menu-item v-for="itemChilde in item.childe" :key="itemChilde.path" :index="itemChilde.path" @click="routerClik(itemChilde.path)">{{itemChilde.name}}</el-menu-item>
       </el-submenu>
-      <el-menu-item index="2">
-        <i class="el-icon-menu"></i>
-        <span slot="title">导航二</span>
-      </el-menu-item>
-      <el-menu-item index="3" disabled>
-        <i class="el-icon-document"></i>
-        <span slot="title">导航三</span>
-      </el-menu-item>
-      <el-menu-item index="4">
-        <i class="el-icon-setting"></i>
-        <span slot="title">导航四</span>
-      </el-menu-item>
     </el-menu>
   </section>
 </template>
@@ -42,6 +19,27 @@
     asyncData(){
 
     },
+    data(){
+      return {
+        menus:[
+          {
+            name:'仪表盘',
+            iconClass:'el-icon-stopwatch',
+            path:'/dashboard',
+            childe:[
+              {
+                name:'工作台',
+                path:'/dashboard/workplace',
+              },
+              {
+                name:'主页',
+                path:'/home',
+              }
+            ]
+          }
+        ]
+      }
+    },
     props: ['isCollapse'],
     methods: {
       handleOpen(key, keyPath) {
@@ -49,6 +47,9 @@
       },
       handleClose(key, keyPath) {
         console.log(key, keyPath);
+      },
+      routerClik(path){
+        this.$router.push(path)
       }
     }
   }
@@ -80,6 +81,13 @@
       border-right:none;
       height: 100%;
       overflow: hidden;
+      .el-menu-item.is-active{
+        background-color: #fa541c!important;
+        color: #fff!important;
+      }
+      .el-menu-item:focus, .el-menu-item:hover{
+        color: #fff!important;
+      }
     }
   }
   .el-menu-vertical-demo:not(.el-menu--collapse) {

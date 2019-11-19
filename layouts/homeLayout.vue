@@ -16,7 +16,7 @@
             width="100"
             popper-class="popover-menu"
             trigger="hover">
-              <div>
+              <div class="item" @click="$router.push('/')">
                 <span class="el-icon-switch-button"></span> 退出登入
               </div>
             <div class="info" slot="reference">
@@ -98,16 +98,11 @@ html {
           vertical-align: middle;
         }
       }
-      .popover-menu{
-        div{
-          cursor: pointer;
-          span{
-            font-size: 30px;
-            margin-right: 10px;
-          }
-        }
-      }
+      
     }
+  }
+  .el-main{
+    padding: 0px;
   }
   .footer{
     height:30px;
@@ -116,6 +111,22 @@ html {
     text-align:center;
     font-size:14px;
     color:#666;
+  }
+}
+.popover-menu{
+  padding: 6px 0 6px 0px;
+  .item{
+    padding: 10px;
+    cursor: pointer;
+    span{
+      font-size: 20px;
+      vertical-align: top;
+      margin-right: 8px;
+    }
+    &:hover{
+      background-color: rgb(247, 218, 168);;
+      color: rgb(240, 139, 8);
+    }
   }
 }
 
