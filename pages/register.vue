@@ -35,7 +35,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { sendVerify , register } from '~/api/users.js'
 export default {
   layout:"default",

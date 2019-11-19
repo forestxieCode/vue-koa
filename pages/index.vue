@@ -14,8 +14,8 @@
           <el-checkbox v-model="isAutoLoign">自动登入</el-checkbox>
           <nuxt-link to="/">忘记密码</nuxt-link>
         </div>
-        <el-form-item>
-          <el-button type="primary" @click="loginHnadle('login_form')" style="width:100%;">登入</el-button>
+        <el-form-item >
+          <el-button type="primary" @keyup.enter="loginHnadle('login_form')" @click="loginHnadle('login_form')" style="width:100%;">登 入</el-button>
         </el-form-item>
 
         <div class="ContantSpanBetween">
@@ -52,7 +52,10 @@ export default {
       isAutoLoign:false
     }
   },
-
+  mounted(){
+    sessionStorage.removeItem('token')
+    sessionStorage.removeItem('username')
+  },
   methods:{
      ...mapMutations([
         'saveUserInfo'

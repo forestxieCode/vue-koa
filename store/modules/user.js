@@ -7,7 +7,7 @@ const state = {
 }
 
 const getters = {
-  paths: ({ username }) => username
+  username: ({ username }) => username
 }
 
 const mutations = {
