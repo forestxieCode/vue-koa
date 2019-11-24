@@ -56,6 +56,8 @@
 </script>
 
 <style lang="less">
+  @height:45px;
+
   .aside{
     height: calc(100vh - 64px);
     .logo{
@@ -67,7 +69,6 @@
       background: #002140;
       // -webkit-transition: all .3s;
       // transition: all 400ms;
-
       h1{
         color: #fff;
         font-size: 25px;
@@ -81,6 +82,23 @@
       border-right:none;
       height: 100%;
       overflow: hidden;
+      background: #000c17;
+      color: hsla(0,0%,100%,.65);
+      background: #001529!important;
+      -webkit-box-shadow: 0 2px 8px rgba(0,0,0,.45) inset;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,.45);
+      .el-submenu__title{
+        padding-left: 26px!important;
+        height: @height;
+        line-height: @height;
+      }
+      .el-menu-item{
+        background: transparent!important;
+        color: hsla(0,0%,100%,.65)t!important;
+        height: @height;
+        line-height: @height;
+        padding-left: 46px!important;
+      }
       .el-menu-item.is-active{
         background-color: #fa541c!important;
         color: #fff!important;
@@ -90,8 +108,28 @@
       }
     }
   }
+  .el-menu--collapse{
+    width: 80px;
+  }
   .el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 200px;
+    width: 256px;
     min-height: 100%;
+  }
+  .el-menu--vertical{
+    .el-menu--popup{
+      min-width: 150px;
+      border-radius: 5px;
+      .el-menu-item{
+        height: @height;
+        line-height: @height;
+      }
+      .el-menu-item.is-active{
+        background-color: #fa541c!important;
+        color: #fff!important;
+      }
+      .el-menu-item:focus, .el-menu-item:hover{
+        color: #fff!important;
+      }
+    }
   }
 </style>

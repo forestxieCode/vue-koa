@@ -1,6 +1,6 @@
 <template>
   <el-container class="home">
-    <el-aside :style="`width:${isCollapse?'64':'200'}px;`" >
+    <el-aside :style="`width:${isCollapse?'80':'256'}px;`" >
       <Aside :isCollapse="isCollapse"/>
     </el-aside>
     <el-container>
@@ -23,16 +23,28 @@
               <img src="~/assets/img/avtor.jpg" alt="" class="avtoer"> 欢迎 {{username}}
             </div>
           </el-popover>
-         
+
         </div>
       </el-header>
-      <el-main> <nuxt /></el-main>
+     <header class="header-top" >
+       <!-- 面包屑 -->
+      <el-breadcrumb separator="/">
+        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item>仪表盘</el-breadcrumb-item>
+      </el-breadcrumb>
+      <div class="page-header-heading-title">工作台</div>
+        <!-- 工作台 -->
+      <workplaceHeadTop></workplaceHeadTop>
+
+      </header>
+      <el-main> <nuxt :isCollapse="isCollapse"/></el-main>
       <el-footer class="footer" style="height:30px;">版权 @ 归 www.forestxie.com 所有</el-footer>
     </el-container>
 </el-container>
 </template>
 <script>
 import { mapGetters  } from 'vuex'
+import workplaceHeadTop from '~/components/workplaceComponent/HeadTop'
 import Aside from '~/components/aside'
 export default {
   data(){
@@ -41,7 +53,8 @@ export default {
     }
   },
   components:{
-    Aside
+    Aside,
+    workplaceHeadTop
   },
   computed:{
      ...mapGetters([
@@ -51,17 +64,6 @@ export default {
 }
 </script>
 <style lang="less">
-html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-}
 .home{
   height: 100vh;
   .header{
@@ -83,9 +85,9 @@ html {
       margin-left: auto;
       display: flex;
       .notice{
-        margin-top: 20px;
-        margin-right: 30px;
-        font-size: 20px;
+          margin-top: 20px;
+          margin-right: 30px;
+          font-size: 20px;
       }
       .info{
         line-height: 64px;
@@ -97,9 +99,25 @@ html {
           border-radius: 50%;
           vertical-align: middle;
         }
+       }
       }
-      
-    }
+  }
+  .page-header-heading-title{
+    float: left;
+    width: 100%;
+    display: block;
+    margin-bottom: 0;
+    margin-top: 10px;
+    padding-right: 12px;
+    color: rgba(0,0,0,.85);
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 32px;
+  }
+  .header-top{
+      background: #fff;
+      padding: 16px 32px 0;
+      border-bottom: 1px solid #e8e8e8;
   }
   .el-main{
     padding: 0px;
@@ -129,13 +147,4 @@ html {
     }
   }
 }
-
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 </style>

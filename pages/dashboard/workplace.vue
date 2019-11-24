@@ -1,30 +1,51 @@
 <template>
   <section class="workplace">
-    <header class="workplace-header">
-      <el-breadcrumb separator="/">
-          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item>仪表盘</el-breadcrumb-item>
-      </el-breadcrumb>
-      <el-row style="height:88px;">
-        <el-col :span="5">
-          <img src="~/assets/img/avtor.jpg" alt="" style="height:60px;width:60px;">
-        </el-col>
-        
-      </el-row>
-    </header>
+    <el-row class="workplace-contect" :gutter="20">
+      <el-col :span="16">
+        <ProjectLoding></ProjectLoding>
+        <Dynamic style="margin-top:20px;"></Dynamic>
+      </el-col>
+      <el-col :span="8">
+        <ShortcutBar></ShortcutBar>
+        <PersonalIndex style="margin-top:20px;" :isCollapse="isCollapse"></PersonalIndex>
+      </el-col>
+    </el-row>
   </section>
 </template>
 <script>
+import ProjectLoding from '~/components/workplaceComponent/ProjectLoding'
+import ShortcutBar from '~/components/workplaceComponent/ShortcutBar'
+import Dynamic from '~/components/workplaceComponent/Dynamic'
+import PersonalIndex from '~/components/workplaceComponent/PersonalIndex'
 export default {
-  layout:'homeLayout'
+  layout:'homeLayout',
+  props:['isCollapse'],
+  components:{
+    ProjectLoding,
+    ShortcutBar,
+    Dynamic,
+    PersonalIndex
+  },
+  mounted(){
+    console.log(this.isCollapse)
+  }
 }
 </script>
 <style lang="less">
 .workplace{
-  .workplace-header{
-    background: #fff;
-    padding: 16px 32px 0;
-    border-bottom: 1px solid #e8e8e8;
-  }  
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  transition: .3s;
+  background-color: #f0f2f5;
+  padding: 24px;
+  display: block;
+  -webkit-box-flex: 1;
+  flex: 1;
+  flex-basis: auto;
+  overflow: auto;
+  .workplace-contect{
+
+  }
 }
 </style>

@@ -32,6 +32,7 @@
 import { mapMutations } from 'vuex'
 import { login } from '~/api/users'
 export default {
+  // loading: false,
   asyncData (){
 
   },
@@ -63,8 +64,10 @@ export default {
      loginHnadle(formName){
        this.$refs[formName].validate(async (valid) => {
          if (!valid) return
+         this.$nuxt.$loading.start()
          let res = await login(this.login_form)
          if(res.code===0){
+           this.$nuxt.$loading.finish()
            const { username , token } = res
            this.saveUserInfo({username,token})
            this.$message.success(res.msg)
