@@ -5,7 +5,7 @@
     </el-aside>
     <el-container>
       <el-header class="header" style="height:64px;">
-        <div :class="{'collect':true,'el-icon-s-fold':!isCollapse,'el-icon-s-unfold':isCollapse}" @click="isCollapse=!isCollapse"></div>
+        <div :class="{'collect':true,'el-icon-s-fold':!isCollapse,'el-icon-s-unfold':isCollapse}" @click="CollapseHandle"></div>
         <div class="userinfo">
           <el-badge :value="200" :max="99" class="notice">
             <span class="el-icon-bell"></span>
@@ -23,10 +23,9 @@
               <img src="~/assets/img/avtor.jpg" alt="" class="avtoer"> 欢迎 {{username}}
             </div>
           </el-popover>
-
         </div>
       </el-header>
-     <header class="header-top" >
+     <header class="header-top" v-if="isShowHeader">
        <!-- 面包屑 -->
       <el-breadcrumb separator="/">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
@@ -34,8 +33,7 @@
       </el-breadcrumb>
       <div class="page-header-heading-title">工作台</div>
         <!-- 工作台 -->
-      <workplaceHeadTop></workplaceHeadTop>
-
+       <workplaceHeadTop></workplaceHeadTop>
       </header>
       <el-main> <nuxt :isCollapse="isCollapse"/></el-main>
       <el-footer class="footer" style="height:30px;">版权 @ 归 www.forestxie.com 所有</el-footer>
@@ -43,10 +41,14 @@
 </el-container>
 </template>
 <script>
-import { mapGetters  } from 'vuex'
+import { mapGetters,mapMutations  } from 'vuex'
 import workplaceHeadTop from '~/components/workplaceComponent/HeadTop'
 import Aside from '~/components/aside'
+const hiddenObj = {
+  '/home':true
+}
 export default {
+  loading:false,
   data(){
     return {
       isCollapse:false
@@ -56,11 +58,25 @@ export default {
     Aside,
     workplaceHeadTop
   },
+  methods:{
+    ...mapMutations([
+      'setIsCollapse'
+    ]),
+    CollapseHandle(){
+      this.isCollapse = !this.isCollapse
+      this.setIsCollapse(this.isCollapse)
+    }
+  },
   computed:{
      ...mapGetters([
       'username'
-     ])
-  }
+     ]),
+    isShowHeader(){
+       this.$nuxt.$loading.start()
+       if(hiddenObj[this.$route.fullPath]) return false
+       return true
+    }
+  },
 }
 </script>
 <style lang="less">

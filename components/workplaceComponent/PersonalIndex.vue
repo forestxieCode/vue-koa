@@ -303,14 +303,13 @@
     ]
   }
 
-
+  import { mapGetters  } from 'vuex'
   export default{
     data(){
       return {
         myChart:null
       }
     },
-    props:['isCollapse'],
     mounted(){
       // 绑定监听事件
       console.log(this.FatchisCollapse)
@@ -331,6 +330,16 @@
       resizeHandler() {
         this.myChart.resize()
       }
+    },
+    watch:{
+      isCollapse:function (newVal,oldVal) {
+        this.myChart.resize()
+      }
+    },
+    computed:{
+      ...mapGetters([
+        'isCollapse'
+      ])
     }
   }
 </script>
