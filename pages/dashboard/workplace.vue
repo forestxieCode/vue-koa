@@ -44,8 +44,5 @@ export default {
   flex: 1;
   flex-basis: auto;
   overflow: auto;
-  .workplace-contect{
-
-  }
 }
 </style>

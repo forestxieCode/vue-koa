@@ -72,7 +72,6 @@ export default {
       'username'
      ]),
     isShowHeader(){
-       this.$nuxt.$loading.start()
        if(hiddenObj[this.$route.fullPath]) return false
        return true
     }

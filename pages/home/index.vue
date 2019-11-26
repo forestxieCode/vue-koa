@@ -1,13 +1,42 @@
 <template>
-  <div>
-    这是 home 页面
-  </div>
+  <section class="my-home">
+      <el-row :gutter="20">
+        <!--top-->
+        <el-col :span="6"><TopCardOne> </TopCardOne></el-col>
+        <el-col :span="6">top</el-col>
+        <el-col :span="6">top</el-col>
+        <el-col :span="6">top</el-col>
+
+        <!--middle-->
+        <el-col :span="24">middle</el-col>
+
+        <!--bottom-->
+        <el-col :span="12">bottom</el-col>
+        <el-col :span="12">bottom</el-col>
+      </el-row>
+  </section>
 </template>
 <script>
+  import { TopCardOne } from '~/components/homeComponent'
 export default {
-  layout:'homeLayout'
+  layout:'homeLayout',
+  components:{
+    TopCardOne
+  }
 }
 </script>
 <style lang="less">
-
+.my-home{
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  transition: .3s;
+  background-color: #f0f2f5;
+  padding: 24px;
+  display: block;
+  -webkit-box-flex: 1;
+  flex: 1;
+  flex-basis: auto;
+  overflow: auto;
+}
 </style>

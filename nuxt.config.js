@@ -24,7 +24,8 @@ module.exports = {
   */
   css: [
     'element-ui/lib/theme-chalk/index.css',
-    '~/assets/css/reset.css'
+    '~/assets/css/reset.css',
+    '~/assets/css/font/index.css'
   ],
   /*
   ** Plugins to load before mounting the App
@@ -32,7 +33,8 @@ module.exports = {
   plugins: [
     '@/plugins/element-ui',
     '~/plugins/route',
-    '~/plugins/echarts'
+    '~/plugins/echarts',
+    '~/plugins/v-charts'
   ],
   /*
   ** Nuxt.js dev-modules
