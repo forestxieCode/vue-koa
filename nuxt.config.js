@@ -34,7 +34,7 @@ module.exports = {
     '@/plugins/element-ui',
     '~/plugins/route',
     '~/plugins/echarts',
-    '~/plugins/v-charts'
+    '~/plugins/animationplugins'
   ],
   /*
   ** Nuxt.js dev-modules

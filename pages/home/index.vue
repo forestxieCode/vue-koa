@@ -2,13 +2,13 @@
   <section class="my-home">
       <el-row :gutter="20">
         <!--top-->
-        <el-col :span="6"><TopCardOne> </TopCardOne></el-col>
-        <el-col :span="6">top</el-col>
-        <el-col :span="6">top</el-col>
-        <el-col :span="6">top</el-col>
+        <el-col :span="6"> <TopCardOne/> </el-col>
+        <el-col :span="6"> <TopCardTwo/> </el-col>
+        <el-col :span="6"><TopCardThree/></el-col>
+        <el-col :span="6"><TopCardFour/></el-col>
 
         <!--middle-->
-        <el-col :span="24">middle</el-col>
+        <el-col :span="24" style="margin-top:25px;"><HomeTab/></el-col>
 
         <!--bottom-->
         <el-col :span="12">bottom</el-col>
@@ -17,11 +17,15 @@
   </section>
 </template>
 <script>
-  import { TopCardOne } from '~/components/homeComponent'
+  import { TopCardOne,TopCardTwo,TopCardThree,TopCardFour,HomeTab } from '~/components/homeComponent'
 export default {
   layout:'homeLayout',
   components:{
-    TopCardOne
+    TopCardOne,
+    TopCardTwo,
+    TopCardThree,
+    TopCardFour,
+    HomeTab
   }
 }
 </script>

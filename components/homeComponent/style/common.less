@@ -1,0 +1,68 @@
+.top-card{
+    .el-card__header{
+      padding: 10px 20px 5px;
+      border-bottom: none;
+      color: rgba(0,0,0,.45);
+      font-size: 14px;
+      line-height: 22px;
+      .title{
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+    .el-card__body{
+      padding: 13px;
+      padding-top: 0px;
+      .totle{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-break: break-all;
+        white-space: nowrap;
+        color: #000;
+        margin-bottom: 0;
+        font-size: 30px;
+        line-height: 38px;
+      }
+      .chart-card-content{
+        margin-bottom: 12px;
+        position: relative;
+        height: 46px;
+        width: 100%;
+        .content-fix{
+          position: absolute;
+          left: 0;
+          display: flex;
+          bottom: 0;
+          font-size: 14px;
+          width: 100%;
+          & div:last-child{
+            margin-left: 20px;
+          }
+        }
+      }
+    }
+    .el-divider--horizontal{
+      margin: 10px 0;
+    }
+    .top-card-body-bottom{
+      color: rgba(0,0,0,.65);
+      font-size: 14px;
+      font-variant: tabular-nums;
+      line-height: 1.5;
+      position:relative;
+      list-style: none;
+      height: 20px;
+      position:relative;
+     .content-fix{
+          position: absolute;
+          left: 0;
+          display: flex;
+          bottom: 0;
+          font-size: 14px;
+          width: 100%;
+          & div:last-child{
+            margin-left: 20px;
+          }
+       }
+    }
+  }
