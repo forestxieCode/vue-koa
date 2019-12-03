@@ -45,7 +45,8 @@ import { mapGetters,mapMutations  } from 'vuex'
 import workplaceHeadTop from '~/components/workplaceComponent/HeadTop'
 import Aside from '~/components/aside'
 const hiddenObj = {
-  '/home':true
+  '/home':true,
+  '/graphiceditor':true
 }
 export default {
   loading:false,

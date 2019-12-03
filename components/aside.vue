@@ -3,7 +3,7 @@
     <section class="logo" >
       <h1><span class="el-icon-medal"></span> <span v-if="!isCollapse">Forest Xie</span></h1>
     </section>
-    <el-menu default-active="/dashboard/workplace" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse" :collapse-transition="false"  background-color="#001529"  text-color="hsla(0,0%,100%,.65)" active-text-color="#f5222d">
+    <el-menu default-active="/home" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse" :collapse-transition="false"  background-color="#001529"  text-color="hsla(0,0%,100%,.65)" active-text-color="#f5222d">
       <el-submenu v-for="item in menus" :index="item.path" :key="item.path">
         <template slot="title">
           <i :class="item.iconClass"></i>
@@ -34,6 +34,17 @@
               {
                 name:'主页',
                 path:'/home',
+              }
+            ]
+          },
+          {
+            name:'图形编辑器',
+            iconClass:'el-icon-brush',
+            path:'/graphiceditor',
+            childe:[
+              {
+                name:'流程图编辑器',
+                path:'/graphiceditor',
               }
             ]
           }
@@ -98,6 +109,12 @@
         height: @height;
         line-height: @height;
         padding-left: 46px!important;
+      }
+      .el-submenu.is-active .el-submenu__title i{
+        color: #fa541c;
+      }
+      .el-submenu.is-opened .el-submenu__title i{
+        color: #909399;
       }
       .el-menu-item.is-active{
         background-color: #fa541c!important;
