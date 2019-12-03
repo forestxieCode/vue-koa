@@ -21,13 +21,13 @@
 </template>
 <script>
  const data=[
-      {
+    {
         url:'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
         name:'Alipay',
         description:'那是一种内在的东西，他们到达不了，也无法触及的',
         gropName:'科学搬砖组',
         minus:'14分钟前'
-      },
+    },
    {
      url:'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
      name:'Alipay',

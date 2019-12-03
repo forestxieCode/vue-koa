@@ -21,7 +21,6 @@
                 enter-active-class="animated bounceInLeft"
                 tag="div"
                >
-     
                 <el-row style="height:332px;" v-if="activeName==='first'" :key="1"> 
                         <el-col :span="15">
                             <histogram :isShowAxis="true"/>
@@ -60,8 +59,6 @@
                             </dl>
                         </el-col>
                 </el-row>
-         
-        
                 <el-row style="height:332px;" v-if="activeName==='scond'" :key="2"> 
                         <el-col :span="15">
                             <histogram :isShowAxis="true"/>
@@ -100,7 +97,6 @@
                             </dl>
                         </el-col>
                 </el-row>
-                
          </transition>
      </el-card>
 </template>
@@ -115,18 +111,6 @@ export default {
     },
     components:{
         histogram
-    },
-    methods:{
-        handleClick(){
-            
-        },
-        beforeEnter(){
-
-        },
-        enter(el, done){
-            let delayNum = '.'+el.dataset.index * 100 + 's'
-            el.style.animationDelay = delayNum
-        }
     }
 }
 </script>

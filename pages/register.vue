@@ -141,6 +141,7 @@ export default {
   height: 100vh;
   align-items: center;
   justify-content: center;
+  // background: url(../assets/img/bg.jpg) no-repeat center center;
   .register_container{
     width: 368px;
     header{

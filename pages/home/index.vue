@@ -8,16 +8,16 @@
         <el-col :span="6"><TopCardFour/></el-col>
 
         <!--middle-->
-        <el-col :span="24" style="margin-top:25px;"><HomeTab/></el-col>
+        <el-col :span="24" style="margin-top:22px;"><HomeTab/></el-col>
 
         <!--bottom-->
-        <el-col :span="12">bottom</el-col>
-        <el-col :span="12">bottom</el-col>
+        <el-col :span="12" style="margin-top:22px;"><BottomLeft/></el-col>
+        <el-col :span="12" style="margin-top:22px;"><BottomRight/></el-col>
       </el-row>
   </section>
 </template>
 <script>
-  import { TopCardOne,TopCardTwo,TopCardThree,TopCardFour,HomeTab } from '~/components/homeComponent'
+  import { TopCardOne,TopCardTwo,TopCardThree,TopCardFour,HomeTab,BottomLeft,BottomRight } from '~/components/homeComponent'
 export default {
   layout:'homeLayout',
   components:{
@@ -25,7 +25,9 @@ export default {
     TopCardTwo,
     TopCardThree,
     TopCardFour,
-    HomeTab
+    HomeTab,
+    BottomLeft,
+    BottomRight
   }
 }
 </script>
