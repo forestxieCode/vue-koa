@@ -496,6 +496,7 @@
     color: #606266;
       .flow-detail {
         flex: 1;
+        background: #fff;
         border: 1px solid #EBEEF5;
         padding: 12px;
         box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
@@ -521,6 +522,7 @@
         width: 100px;
         padding: 10px;
         margin: 0 10px;
+        background: #fff;
         border: 1px solid #EBEEF5;
         padding: 12px;
         box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);

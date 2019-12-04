@@ -52,7 +52,7 @@
 <script>
 import { mapGetters,mapMutations  } from 'vuex'
 import workplaceHeadTop from '~/components/workplaceComponent/HeadTop'
-import Aside from '~/components/aside'
+import Aside from '~/components/public/aside'
 const hiddenObj = {
   '/home':true,
   '/graphiceditor':true
