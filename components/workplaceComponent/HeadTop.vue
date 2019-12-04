@@ -5,7 +5,7 @@
           <img src="~/assets/img/avtor.jpg" alt="" >
         </div>
         <div class="header-left-info">
-            <div>早安，{{username}}，祝你开心每一天！</div>
+            <div>{{$t('workplace.morning')}}，{{username}}，祝你开心每一天！</div>
             <div>交互专家 |蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED</div>
         </div>
       </el-col>

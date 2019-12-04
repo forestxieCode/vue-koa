@@ -30,12 +30,19 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
+  router: {
+    middleware: 'i18n'
+  },
   plugins: [
     '@/plugins/element-ui',
     '~/plugins/route',
     '~/plugins/echarts',
-    '~/plugins/animationplugins'
+    '~/plugins/animationplugins',
+    '~/plugins/i18n.js'
   ],
+  generate: {
+    routes: ['/', '/workplace', '/zh-CN', '/zh-CN/workplace']
+  },
   /*
   ** Nuxt.js dev-modules
   */

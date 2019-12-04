@@ -10,6 +10,15 @@
           <el-badge :value="200" :max="99" class="notice">
             <span class="el-icon-bell"></span>
           </el-badge>
+          <el-dropdown class="lange" @command="handleCommand">
+            <span class="el-dropdown-link">
+              <i class="el-icon-setting el-icon--right"></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item command="zh-CN">中文</el-dropdown-item>
+              <el-dropdown-item command="en-US">English</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
           <el-popover
             ref="popover"
             placement="bottom-start"
@@ -20,7 +29,7 @@
                 <span class="el-icon-switch-button"></span> 退出登入
               </div>
             <div class="info" slot="reference">
-              <img src="~/assets/img/avtor.jpg" alt="" class="avtoer"> 欢迎 {{username}}
+              <img src="~/assets/img/avtor.jpg" alt="" class="avtoer"> {{$t('global.welcome')}} {{username}}
             </div>
           </el-popover>
         </div>
@@ -66,6 +75,10 @@ export default {
     CollapseHandle(){
       this.isCollapse = !this.isCollapse
       this.setIsCollapse(this.isCollapse)
+    },
+    handleCommand(LangName){
+      console.log(LangName)
+      this.$router.push(`/${LangName}/workplace`)
     }
   },
   computed:{
@@ -104,6 +117,11 @@ export default {
           margin-top: 20px;
           margin-right: 30px;
           font-size: 20px;
+      }
+      .lange{
+         margin-top: 20px;
+        margin-right: 30px;
+        font-size: 18px;
       }
       .info{
         line-height: 64px;

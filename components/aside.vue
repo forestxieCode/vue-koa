@@ -25,11 +25,11 @@
           {
             name:'仪表盘',
             iconClass:'el-icon-stopwatch',
-            path:'/dashboard',
+            path:'/workplace',
             childe:[
               {
                 name:'工作台',
-                path:'/dashboard/workplace',
+                path:'/workplace',
               },
               {
                 name:'主页',
