@@ -1,7 +1,4 @@
 
-
-import { Message } from 'element-ui'  
-
 const state = {
   username : sessionStorage.getItem('username')||''
 }

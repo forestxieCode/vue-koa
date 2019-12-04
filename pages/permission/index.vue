@@ -1,19 +1,15 @@
 <template>
-  <section class="graphiceditor">
-      <flowMain/>
+  <section class="permission">
+      
   </section>
 </template>
 <script>
-import flowMain  from '~/components/public/flow/flowMain'
 export default {
   layout:'homeLayout',
-  components:{
-      flowMain
-  }
 }
 </script>
 <style lang="less">
-.graphiceditor{
+.permission{
   width: 100%;
   height: 100%;
   min-height: 100%;

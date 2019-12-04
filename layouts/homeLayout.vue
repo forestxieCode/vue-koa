@@ -55,7 +55,9 @@ import workplaceHeadTop from '~/components/workplaceComponent/HeadTop'
 import Aside from '~/components/public/aside'
 const hiddenObj = {
   '/home':true,
-  '/graphiceditor':true
+  '/graphiceditor':true,
+  '/permission':true,
+  '/personalpage/personalsetting':true
 }
 export default {
   loading:false,

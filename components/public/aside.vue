@@ -47,6 +47,28 @@
                 path:'/graphiceditor',
               }
             ]
+          },
+          {
+            name:'个人页',
+            iconClass:'el-icon-user',
+            path:'/personalpage',
+            childe:[
+              {
+                name:'个人设置',
+                path:'/personalpage/personalsetting',
+              }
+            ]
+          },
+          {
+            name:'权限管理',
+            iconClass:'el-icon-lock',
+            path:'/permission',
+            childe:[
+              {
+                name:'角色权限',
+                path:'/permission',
+              }
+            ]
           }
         ]
       }

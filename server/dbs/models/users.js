@@ -15,6 +15,18 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
+  phone:{
+    type: String,
+  },
+  nice:{
+    type: String,
+  },
+  desc:{
+    type: String,
+  },
+  authorImg:{
+    type: String,
+  },
   token: {
     type: String,
     required: true

@@ -24,6 +24,8 @@ app.use(
   })
 )
 
+app.use(require('koa-static')(__dirname + '/public'))
+
 // error handler
 onerror(app)
 
