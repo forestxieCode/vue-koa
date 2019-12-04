@@ -41,7 +41,7 @@
                         minWidth: '80px',
                         top: this.node.top,
                         left: this.node.left,
-                        boxShadow: this.mouseEnter ? '#66a6e0 0px 0px 12px 0px' : '',
+                        boxShadow: this.mouseEnter ? '#666 0px 0px 4px 0px' : '',
                     }
                 }
             },
@@ -91,13 +91,15 @@
     box-shadow: 0 0 2px #696969;
     cursor: move;
     overflow: initial;
-    background: #fbf4dc;
-    padding: 0 10px;
+    font-size: 14px;
+    color: #606266;
+    border-radius: 5px;
+    // background: #fbf4dc;
+    padding: 9px 10px;
      .node-titel {
             height: 20px;
             background: #ffc400;
         }
-
         .node-icon {
             position: absolute;
             top: 0px;
@@ -115,7 +117,8 @@
         }
         .node-del {
             position: absolute;
-            color: red;
+            
+            color: #ccc;
             font-size: 16px;
             cursor: pointer;
             top: -8px;
