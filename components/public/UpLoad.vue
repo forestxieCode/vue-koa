@@ -57,10 +57,12 @@ export default {
     .avatar{
         position:absolute;
         border-radius: 50%; 
-        width:70px;
-        height:70px;
+        width:90px;
+        height:90px;
     }
     .default_aveter{
+        width:90px;
+        height:90px;
         position: absolute;
         border-radius: 50%;
     }

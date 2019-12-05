@@ -18,7 +18,7 @@
                     </el-form-item>
                 </el-form>
             </el-col>
-            <el-col :span="8">
+            <el-col :span="8" style="padding-left:10%;">
                 <up-load></up-load>
             </el-col>
         </el-row>

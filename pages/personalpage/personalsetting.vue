@@ -30,13 +30,12 @@ export default {
   min-height: 100%;
   transition: .3s;
   background-color: #f0f2f5;
-  padding: 24px;
   display: block;
   -webkit-box-flex: 1;
   flex: 1;
   flex-basis: auto;
   overflow: auto;
-  padding: 40px;
+  padding: 25px;
 }
 .personalsetting-warrp{
     flex: 1;
