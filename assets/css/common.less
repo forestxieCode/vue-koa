@@ -1,0 +1,97 @@
+@main-color: #305fd0;
+@bg-fuzhu-color: #edf2fe;
+@btn-click-color: #1a4abe;
+@btn-border-color:#e8e8e8;
+
+/** 
+  弹框
+*/
+.el-dialog{
+  border-radius: 3px;
+  max-width: 1200px;
+  // 头部
+  .el-dialog__header{
+    padding: 25px;
+    .el-dialog__title {
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .el-dialog__headerbtn{
+      .el-dialog__close{
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+      }
+      &:hover .el-dialog__close{
+        background-color: red;
+        border-radius: 50%;
+        color: #fff;
+      }
+    }
+  }
+  // 内容
+  .el-dialog__body{
+    border-top: 1px solid #f9f9f9;
+    padding: 25px;
+    overflow-y: auto;
+    max-height: 477px;
+    
+    .el-button{
+      margin-left: 0px;
+    }
+  }
+  // 尾部
+  .el-dialog__footer{
+    padding: 25px;
+  }
+}
+
+/** 
+  公共按钮
+*/
+.my-btn {
+  padding: 0!important;
+  display: inline-block;
+  border-radius: 3px;
+  line-height: 40px;
+  font-size: 15px;
+  height: 40px;
+  min-width: 97px;
+  margin-left: 8px!important;
+  padding: 0px;
+  cursor: pointer;
+  > i {
+    margin-right: 6px;
+    width: 16px;
+    height: 16px;
+  }
+  > span {
+    margin: 0;
+  }
+  &.my-btn-primary {
+    background-color: @main-color;
+    color: #fff;
+    border: 1px solid @main-color;
+    // 新增行高
+    height: 40px;
+    line-height: 40px;
+    &:hover {
+      color: #fff;
+      background-color: @btn-click-color;
+      border-color: @btn-click-color;
+    }
+  }
+  &.my-btn-default {
+    background-color: #ffffff;
+    color: #000;
+    border-color: @btn-border-color;
+    height: 40px;
+    line-height: 40px;
+    &:hover {
+      background-color: @bg-fuzhu-color;
+      border: 1px solid #c0d4ff ;
+      color: #000 ;
+    }
+  }
+}

@@ -95,6 +95,7 @@ export default {
 }
 </script>
 <style lang="less">
+@import url('../assets/css/common.less');
 .home{
   height: 100vh;
   .header{

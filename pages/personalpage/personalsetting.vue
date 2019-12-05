@@ -1,25 +1,46 @@
 <template>
   <section class="personalsetting">
-      <div class="personalsetting-warrp">
-          <el-tabs :tab-position="tabPosition" style="height:100%;">
-            <el-tab-pane label="基本设置"><basic-setup style="margin-left:20px;"/></el-tab-pane>
-            <el-tab-pane label="安全设置">配置管理</el-tab-pane>
-            <el-tab-pane label="消息通知">角色管理</el-tab-pane>
+      <div class="personalsetting-warrp" ref="personalsettingWarrp" >
+          <el-tabs :tab-position="tabPosition" v-model="activeName" :style="`height:100%;`">
+            <el-tab-pane label="基本设置" name="0">
+              <basic-setup style="margin-left:20px;" ref="personalsettingWarrp0"/>
+            </el-tab-pane>
+            <el-tab-pane label="安全设置" name="1">
+              <security-setting style="margin-left:20px;" ref="personalsettingWarrp1"/>
+            </el-tab-pane>
+            <el-tab-pane label="个人动态" name="2" ref="personalsettingWarrp2">
+                个人动态
+            </el-tab-pane>
         </el-tabs>
       </div>
   </section>
 </template>
 <script>
-import { BasicSetup } from '~/components/personalpageComponent'
+import { BasicSetup ,SecuritySetting} from '~/components/personalpageComponent'
 export default {
   layout:'homeLayout',
    data() {
       return {
-        tabPosition: 'left'
-      };
+        tabPosition: 'left',
+        tHeight:'',
+        activeName: '0',
+      }
     },
     components:{
-        BasicSetup
+        BasicSetup,
+        SecuritySetting
+    },
+    watch:{
+      activeName:function(newVal,oldVal){
+        this.$nextTick(()=>{
+           console.log(this.$refs['personalsettingWarrp'+this.activeName].clientHeight)
+         })
+      }
+    },
+    mounted(){
+        this.$nextTick(()=>{
+           console.log(this.$refs.personalsettingWarrp.clientHeight)
+        })
     }
 }
 </script>
@@ -41,8 +62,10 @@ export default {
     flex: 1;
     width: 100%;
     padding: 15px;
-    height: 100%;
     border-radius: 3px;
     background-color: #fff;
+    .el-tabs__item{
+      padding: 0 36px;
+    }
 }
 </style>

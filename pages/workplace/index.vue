@@ -25,9 +25,6 @@ export default {
     ShortcutBar,
     Dynamic,
     PersonalIndex
-  },
-  mounted(){
-    console.log(this.isCollapse)
   }
 }
 </script>

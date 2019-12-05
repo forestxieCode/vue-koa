@@ -69,6 +69,8 @@ export default {
 </script>
 <style lang="less">
 .basic-setup{
+    flex: 1;
+    height: 100%;
     margin-top: 5px;
     .title{
         color: rgba(0,0,0,.85);

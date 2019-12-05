@@ -133,13 +133,13 @@
         padding-left: 46px!important;
       }
       .el-submenu.is-active .el-submenu__title i{
-        color: #fa541c;
+        color: #1890ff;
       }
       .el-submenu.is-opened .el-submenu__title i{
         color: #909399;
       }
       .el-menu-item.is-active{
-        background-color: #fa541c!important;
+        background-color: #1890ff!important;
         color: #fff!important;
       }
       .el-menu-item:focus, .el-menu-item:hover{
@@ -163,7 +163,7 @@
         line-height: @height;
       }
       .el-menu-item.is-active{
-        background-color: #fa541c!important;
+        background-color: #1890ff!important;
         color: #fff!important;
       }
       .el-menu-item:focus, .el-menu-item:hover{

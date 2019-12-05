@@ -17,5 +17,9 @@ export const updateUserInfo = (data) => request.post('/update-user-info',data)
 // 得到用户信息
 export const getUserInfo = (data) => request.get('/get-user-info',{params:data})
 
+// 更新用户密码
+export const updatePassworld = (data) => request.post('/update-passworld',data)
+
+
 
 

@@ -35,4 +35,7 @@ router.post('/update-user-info',checkToken,controllers.user.updateUserInfo)
 // 获取用户信息 需要验证 token
 router.get('/get-user-info',checkToken,controllers.user.getUserInfo)
 
+//更新用户 密码 需要验证 token
+router.post('/update-passworld',checkToken,controllers.user.updatePassworld)
+
 module.exports = router

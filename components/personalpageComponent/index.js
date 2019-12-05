@@ -1,4 +1,4 @@
 import  BasicSetup from './BasicSetup'
+import  SecuritySetting from './SecuritySetting'
 
-
-export  { BasicSetup }
+export  { BasicSetup,SecuritySetting }

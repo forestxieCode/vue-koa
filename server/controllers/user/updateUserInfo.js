@@ -11,7 +11,7 @@ module.exports = async (ctx, next) => {
     doc.authorImg = authorImg
 
     try {
-        await doc.save() // 更新mongo中对应用户名的token
+        await doc.save() 
         ctx.body = {
           code: 0,
           msg: '更新'+username+'信息成功'

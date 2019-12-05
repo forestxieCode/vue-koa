@@ -140,7 +140,7 @@ export default {
                 }
             }
             span.active{
-                color: #fa541c;
+                color: #1890ff;
                 width:0;
             }
             span::after{
@@ -151,7 +151,7 @@ export default {
                 position: absolute;
                 bottom: -22px;
                 left: 0;
-                background-color: #fa541c;
+                background-color: #1890ff;
                 transition:all .2s ease-in;
                 
             }
@@ -160,7 +160,7 @@ export default {
                 transform:scale(1);
             }
             span:hover {
-                color: #fa541c;
+                color: #1890ff;
             }
         }
         .right{

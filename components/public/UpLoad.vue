@@ -11,6 +11,7 @@
          :on-success="handleAvatarSuccess"
          :before-upload="beforeAvatarUpload"
          nctype="multipart/form-data">
+             <i class="el-icon-upload uploadIcon"></i>
             <img  v-if="imgUrl" :src="`${$config.fileApi}${imgUrl}`" alt="" class="avatar" >
             <img  v-else src="../../assets/img/default_aveter.jpg" class="default_aveter" > 
             <!-- <i  class="el-icon-plus avatar-uploader-icon" style="position: absolute;top: 0px;opacity: 0;"></i> -->
@@ -72,6 +73,15 @@ export default {
         border-radius: 50%; 
         width:90px;
         height:90px;
+    }
+    .uploadIcon{
+        position: absolute;
+        top: 85px;
+        left: 45px;
+        color: #fff;
+        z-index: 2;
+        font-size: 20px;
+        transform: translateX(-50%)
     }
     .default_aveter{
         width:90px;
