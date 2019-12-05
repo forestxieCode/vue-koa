@@ -1,17 +1,20 @@
 
 const state = {
-  username : sessionStorage.getItem('username')||''
+  username:JSON.parse(sessionStorage.getItem('userinfo')).username ||'',
+  userinfo : JSON.parse(sessionStorage.getItem('userinfo')) ||''
 }
 
 const getters = {
+  userinfo: ({ userinfo }) => userinfo,
   username: ({ username }) => username
 }
 
 const mutations = {
   saveUserInfo (state, data) {
-    const { token,username } = data
-    sessionStorage.setItem('token',token)
-    sessionStorage.setItem('username',username)
+    state.userinfo = data
+    state.username = data.username
+    sessionStorage.setItem('token',data.token)
+    sessionStorage.setItem('userinfo',JSON.stringify(data))
   }
 }
 

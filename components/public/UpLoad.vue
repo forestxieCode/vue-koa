@@ -27,26 +27,39 @@ export default {
            myToken: { Authorization: token }
        } 
     },
+    props:{
+        authorImg:{
+            type:String
+        }
+    },
+    mounted(){
+        this.imgUrl = this.authorImg
+    },
+    watch:{
+        authorImg:function(newVal,oldVal){
+            this.imgUrl = newVal
+        }
+    },
     methods:{
       uploadError() {
           this.$message.error('上传失败，请重新上传')
-        },
-     
+      },
       beforeAvatarUpload(file) {
-          const isJPG = file.type === 'image/jpeg';
+          const fileType = ['image/gif','image/jpeg','image/jpg','image/png','image/svg']
           const isLt2M = file.size / 1024 / 1024 < 2;
-          if (!isJPG) {
-            this.$message.error('上传头像图片只能是 JPG 格式!')
-            return
+
+          if (fileType.indexOf(file.type)===-1) {
+            this.$message.error('上传格式错误!')
+            return false
           }
           if (!isLt2M) {
             this.$message.error('上传头像图片大小不能超过 2MB!')
-            return
+            return false
           }   
       },
      handleAvatarSuccess(res, file) {
          this.imgUrl = res.filename
-         console.log(res.filename)
+         this.$emit('update:authorImg',res.filename)
      },
     },
 }

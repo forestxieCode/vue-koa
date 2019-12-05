@@ -29,4 +29,10 @@ router.post('/deluser',checkToken, controllers.user.deluser)
 // 上传图片 需要验证 token
 router.post('/upload',upload.single('file'),controllers.upload)
 
+// 更新用户信息 需要验证 token
+router.post('/update-user-info',checkToken,controllers.user.updateUserInfo)
+
+// 获取用户信息 需要验证 token
+router.get('/get-user-info',checkToken,controllers.user.getUserInfo)
+
 module.exports = router

@@ -8,7 +8,7 @@ module.exports = function (id) {
     },
     'cedric1990',
     {
-      expiresIn: '300s'
+      expiresIn: 3000
     }
   )
 

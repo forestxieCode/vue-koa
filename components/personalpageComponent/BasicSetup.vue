@@ -14,37 +14,56 @@
                         <el-input type="textarea" v-model="formData.desc" :rows="5" placeholder="请留下你最美的芳言"></el-input>
                     </el-form-item>
                      <el-form-item>
-                        <el-button type="primary" @click="submitForm('ruleForm')" size="small">提交</el-button>
+                        <el-button type="primary" @click="submitForm()" size="small">保存</el-button>
                     </el-form-item>
                 </el-form>
             </el-col>
             <el-col :span="8" style="padding-left:10%;">
-                <up-load></up-load>
+                <up-load :authorImg.sync='formData.authorImg'></up-load>
             </el-col>
         </el-row>
     </section>
 </template>
 <script>
-
+import { mapGetters,mapMutations  } from 'vuex'
+import { updateUserInfo,getUserInfo } from '~/api/users'
 import  UpLoad  from '~/components/public/UpLoad'
 export default {
     data(){
         return{
-          formData:{
-              nice:'',
-              desc:'',
-              phone:'',
-              authorImg:''
-          }
+          formData:{}
         }
     },
     components:{
         UpLoad
     },
     methods:{
-        submitForm(){
-            
+       ...mapMutations([
+        'saveUserInfo'
+       ]),
+        async submitForm(){
+            let userinfo = {...this.formData}
+            delete userinfo.token; delete userinfo.email
+            const res =  await updateUserInfo(userinfo)
+            if(res.code === 0){
+                const userRes = await getUserInfo({username:this.username})
+                if(userRes.code===0){
+                    this.saveUserInfo(userRes.data)
+                }
+                this.$message.success(res.msg)
+            }else {
+                this.$message.error(res.msg)
+            }  
         }
+    },
+    computed:{
+     ...mapGetters([
+      'userinfo',
+      'username'
+     ])
+    },
+     mounted(){
+        this.formData = {...this.userinfo}
     }
 }
 </script>

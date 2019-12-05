@@ -8,7 +8,6 @@ module.exports = async (ctx, next) => {
     console.log(12,username,password)
   
     let doc = await User.findOne({ "username":username })
-  
     if (!doc) { 
       ctx.body = {
         code: -1,
@@ -22,6 +21,8 @@ module.exports = async (ctx, next) => {
     } else if (doc.password === password) {
       console.log('密码正确')
       let token = createToken(username) // 生成token 
+
+      console.log('token',token)
       doc.token = token // 更新mongo中对应用户名的token
       try {
         await doc.save() // 更新mongo中对应用户名的token
@@ -29,7 +30,12 @@ module.exports = async (ctx, next) => {
           code: 0,
           msg: '登录成功',
           username,
-          token
+          token,
+          email:doc.email || '',
+          phone:doc.phone || '',
+          nice:doc.nice || '',
+          desc:doc.desc || '',
+          authorImg:doc.authorImg || ''
         }
       } catch (err) {
         ctx.body = {

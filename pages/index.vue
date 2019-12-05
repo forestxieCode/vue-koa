@@ -68,8 +68,8 @@ export default {
          let res = await login(this.login_form)
          if(res.code===0){
            this.$nuxt.$loading.finish()
-           const { username , token } = res
-           this.saveUserInfo({username,token})
+           let info = {...res};delete info.code;delete info.msg
+           this.saveUserInfo(info)
            this.$message.success(res.msg)
            this.$router.push('\home')
          }

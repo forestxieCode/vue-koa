@@ -29,7 +29,7 @@
                 <span class="el-icon-switch-button"></span> 退出登入
               </div>
             <div class="info" slot="reference">
-              <img src="~/assets/img/avtor.jpg" alt="" class="avtoer"> {{$t('global.welcome')}} {{username}}
+              <img :src="userinfo.authorImg?userinfo.authorImg:'~/assets/img/avtor.jpg'" alt="" class="avtoer"> {{$t('global.welcome')}} {{username}}
             </div>
           </el-popover>
         </div>
@@ -79,13 +79,13 @@ export default {
       this.setIsCollapse(this.isCollapse)
     },
     handleCommand(LangName){
-      console.log(LangName)
       this.$router.push(`/${LangName}/workplace`)
     }
   },
   computed:{
      ...mapGetters([
-      'username'
+      'username',
+      'userinfo'
      ]),
     isShowHeader(){
        if(hiddenObj[this.$route.fullPath]) return false
