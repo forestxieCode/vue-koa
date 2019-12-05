@@ -2,11 +2,11 @@
    <el-row class="workplace-head-top">
       <el-col :span="10" class="header-left">
         <div>
-          <img src="~/assets/img/avtor.jpg" alt="" >
+          <img :src="userinfo.authorImg?userinfo.authorImg:'~/assets/img/avtor.jpg'" alt="" >
         </div>
         <div class="header-left-info">
-            <div>{{$t('workplace.morning')}}，{{username}}，祝你开心每一天！</div>
-            <div>交互专家 |蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED</div>
+            <div>{{getTimeText}}，{{username}}，要不要来一把LoL！</div>
+            <div>{{userinfo.nice}} | {{userinfo.desc}}</div>
         </div>
       </el-col>
         <el-col :span="14">
@@ -32,8 +32,25 @@ import { mapGetters  } from 'vuex'
 export default {
     computed:{
      ...mapGetters([
-      'username'
-     ])
+      'username',
+      'userinfo'
+     ]),
+     getTimeText(){
+        let timeNow = new Date();
+       // 获取当前小时
+       let hours = timeNow.getHours();
+       let text = '';
+       if (hours >= 0 && hours <= 10) {
+           text = this.$t('workplace.morning');
+       } else if (hours > 10 && hours <= 14) {
+           text = this.$t('workplace.noon');
+       } else if (hours > 14 && hours <= 18) {
+           text = this.$t('workplace.afternoon');
+       } else if (hours > 18 && hours <= 24) {
+           text = this.$t('workplace.evening');
+       }
+        return text
+     }
   }
 }
 </script>

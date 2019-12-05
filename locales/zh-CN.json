@@ -1,6 +1,9 @@
 {
   "workplace":{
-    "morning":"早安"
+    "morning":"早上好",
+    "noon":"中午好",
+    "afternoon":"下午好",
+    "evening":"晚上好"
   },
   "global":{
     "welcome":"欢迎"

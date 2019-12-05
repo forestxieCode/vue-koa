@@ -1,6 +1,9 @@
 {
   "workplace":{
-    "morning":"Good morning"
+    "morning":"Good morning",
+    "noon":"Good noon",
+    "afternoon":"Good afternoon",
+    "evening":"Good evening"
   },
   "global":{
     "welcome":"Welcome"

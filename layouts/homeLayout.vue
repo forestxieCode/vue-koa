@@ -38,7 +38,7 @@
        <!-- 面包屑 -->
       <el-breadcrumb separator="/">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item>仪表盘</el-breadcrumb-item>
+          <el-breadcrumb-item>工作台</el-breadcrumb-item>
       </el-breadcrumb>
       <div class="page-header-heading-title">工作台</div>
         <!-- 工作台 -->
