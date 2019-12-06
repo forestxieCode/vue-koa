@@ -16,7 +16,7 @@
   </el-card>
 </template>
 <script>
-  const dynamicArr = [
+const dynamicArr = [
     {
       url:'http://img.mp.sohu.com/q_mini,c_zoom,w_640/upload/20170803/a44baf420efe4b399dc1e4e8b4f89055_th.jpg',
       contect:'加油加油，快起来修复bug啦',

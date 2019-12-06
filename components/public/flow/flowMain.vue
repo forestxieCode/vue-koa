@@ -48,11 +48,13 @@
 </template>
 
 <script>
-  import { jsPlumb } from 'jsplumb'
-  import flowNode from './flowNode.vue'
-  import editFlow from './editFlow.vue'
-  import editNode from './editNode.vue'
-  import editLine from './editLine.vue'
+import { jsPlumb } from 'jsplumb'
+import flowNode from './flowNode.vue'
+import editFlow from './editFlow.vue'
+import editNode from './editNode.vue'
+import editLine from './editLine.vue'
+import { saveFlow,getFlowInfo } from '~/api/flow'
+import { mapGetters  } from 'vuex'
   export default {
     name: 'flowMain',
     data() {
@@ -188,8 +190,14 @@
       editNode,
       editLine
     },
+    computed:{
+     ...mapGetters([
+      'userinfo'
+     ])
+    },
     created() {},
     mounted() {
+      this.getFlowInfo()
       this.jsPlumb = jsPlumb.getInstance();
       this.$nextTick(() => {
         this.init();
@@ -197,6 +205,12 @@
       this.editFlow()
     },
     methods: {
+      async getFlowInfo(){
+        const res =  await getFlowInfo({username:this.userinfo.username})
+        this.data.lineList = res.data.lineList
+        this.data.flowInfo = res.data.flowInfo
+        this.data.nodeList = res.data.nodeList
+      },
       init() {
         const _this = this
         this.jsPlumb.ready(function() {
@@ -486,11 +500,10 @@
         var uuid = s.join("");
         return uuid;
       },
-      saveData() {
-        //console.log(this.jsPlumb)
-        //console.log(this.jsPlumb.Defaults)
-        //console.log('线', this.jsPlumb.getConnections())
-        console.log(this.data);
+      async saveData() {
+        const res = await saveFlow(Object.assign({...this.data},{username:this.userinfo.username}))
+        this.getFlowInfo()
+        this.$message.success(res.msg)
       },
       editFlow() {
         this.editType = 'flow';

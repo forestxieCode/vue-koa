@@ -47,5 +47,11 @@ router.get('/get-message-list',checkToken,controllers.user.getMessageList)
 // 删除留言
 router.get('/delete-message',checkToken,controllers.user.deleteMessage)
 
+//保存 更新流程图信息 需要验证 token
+router.post('/save-flow',checkToken,controllers.flow.saveFlow)
+
+//获取流程图的信息
+router.get('/get-flow-info',checkToken,controllers.flow.getFlowInfo)
+
 
 module.exports = router
