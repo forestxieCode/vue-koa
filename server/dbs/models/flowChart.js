@@ -8,7 +8,7 @@ const FlowChartSchema = new Schema({
     required: true
   },
   flowInfo:{
-    type: Object,
+    type: Array,
     required: true
   },
   lineList:{

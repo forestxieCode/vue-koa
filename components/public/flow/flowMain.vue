@@ -161,19 +161,19 @@ import { mapGetters  } from 'vuex'
             Remark: '',
           },
           nodeList: [
-            {Type: 1,id: "69c8b9ed-fa07-4d92-86e1-90c39f14f809",label: "起点",left: "420px",top: "112px"},
-            {Type: 2,id: "fb287d92-01ce-47e2-9e2a-fc2341e8c9d8",label: "终点",left: "338px",top: "368px"},
-            {Type: 2,id: "0fe55a15-4ebb-44e3-8081-699b402fcfe8",label: "终点",left: "634px",top: "335px"},
-            {Type: 3,id: "7226a594-f34f-4ace-8a68-a222792bacbb",label: "人工活动",left: "513px",top: "384px"},
-            {Type: 1,id: "286ed467-d146-4eeb-b2c2-f00ae419483d",label: "起点",left: "429px",top: "521px"}
+            // {Type: 1,id: "69c8b9ed-fa07-4d92-86e1-90c39f14f809",label: "起点",left: "420px",top: "112px"},
+            // {Type: 2,id: "fb287d92-01ce-47e2-9e2a-fc2341e8c9d8",label: "终点",left: "338px",top: "368px"},
+            // {Type: 2,id: "0fe55a15-4ebb-44e3-8081-699b402fcfe8",label: "终点",left: "634px",top: "335px"},
+            // {Type: 3,id: "7226a594-f34f-4ace-8a68-a222792bacbb",label: "人工活动",left: "513px",top: "384px"},
+            // {Type: 1,id: "286ed467-d146-4eeb-b2c2-f00ae419483d",label: "起点",left: "429px",top: "521px"}
           ],
           lineList: [
-            {Remark: "",from: "69c8b9ed-fa07-4d92-86e1-90c39f14f809",id: "dbf2a613-6590-4265-8246-18eb7047a063",label: "连线名称",to: "fb287d92-01ce-47e2-9e2a-fc2341e8c9d8"},
-            {Remark: "",from: "69c8b9ed-fa07-4d92-86e1-90c39f14f809",id: "9029aec0-1ba5-4d02-8c0f-d994bff130a0",label: "连线名称",to: "0fe55a15-4ebb-44e3-8081-699b402fcfe8"},
-            {Remark: "",from: "69c8b9ed-fa07-4d92-86e1-90c39f14f809",id: "f7f2724b-bb42-4828-8df9-4fbedbdc9699",label: "连线名称",to: "7226a594-f34f-4ace-8a68-a222792bacbb"},
-            {Remark: "",from: "69c8b9ed-fa07-4d92-86e1-90c39f14f809",id: "f7f2724b-bb42-4828-8df9-4fbedbdc9699",label: "连线名称",to: "7226a594-f34f-4ace-8a68-a222792bacbb"},
-            {Remark: "",from: "fb287d92-01ce-47e2-9e2a-fc2341e8c9d8",id: "22246b74-77ac-4cef-b06c-2a2a5b420664",label: "连线名称",to: "286ed467-d146-4eeb-b2c2-f00ae419483d"},
-            {Remark: "",from: "7226a594-f34f-4ace-8a68-a222792bacbb",id: "a7ee5931-4048-4a7a-80e8-44acbc51a0e0",label: "连线名称",to: "286ed467-d146-4eeb-b2c2-f00ae419483d"}
+            // {Remark: "",from: "69c8b9ed-fa07-4d92-86e1-90c39f14f809",id: "dbf2a613-6590-4265-8246-18eb7047a063",label: "连线名称",to: "fb287d92-01ce-47e2-9e2a-fc2341e8c9d8"},
+            // {Remark: "",from: "69c8b9ed-fa07-4d92-86e1-90c39f14f809",id: "9029aec0-1ba5-4d02-8c0f-d994bff130a0",label: "连线名称",to: "0fe55a15-4ebb-44e3-8081-699b402fcfe8"},
+            // {Remark: "",from: "69c8b9ed-fa07-4d92-86e1-90c39f14f809",id: "f7f2724b-bb42-4828-8df9-4fbedbdc9699",label: "连线名称",to: "7226a594-f34f-4ace-8a68-a222792bacbb"},
+            // {Remark: "",from: "69c8b9ed-fa07-4d92-86e1-90c39f14f809",id: "f7f2724b-bb42-4828-8df9-4fbedbdc9699",label: "连线名称",to: "7226a594-f34f-4ace-8a68-a222792bacbb"},
+            // {Remark: "",from: "fb287d92-01ce-47e2-9e2a-fc2341e8c9d8",id: "22246b74-77ac-4cef-b06c-2a2a5b420664",label: "连线名称",to: "286ed467-d146-4eeb-b2c2-f00ae419483d"},
+            // {Remark: "",from: "7226a594-f34f-4ace-8a68-a222792bacbb",id: "a7ee5931-4048-4a7a-80e8-44acbc51a0e0",label: "连线名称",to: "286ed467-d146-4eeb-b2c2-f00ae419483d"}
           ]
         },
         currentItem: '', //临时存添加的元素
@@ -207,9 +207,17 @@ import { mapGetters  } from 'vuex'
     methods: {
       async getFlowInfo(){
         const res =  await getFlowInfo({username:this.userinfo.username})
-        this.data.lineList = res.data.lineList
-        this.data.flowInfo = res.data.flowInfo
-        this.data.nodeList = res.data.nodeList
+        if(res.data.flowInfo.length){
+          this.data.lineList = res.data.lineList
+          this.data.flowInfo = res.data.flowInfo[0]
+          this.data.nodeList = res.data.nodeList
+        }
+        jsPlumb.setSuspendDrawing(true);
+        this.jsPlumb = jsPlumb.getInstance();
+        this.$nextTick(() => {
+          this.init();
+        });
+        this.editFlow()
       },
       init() {
         const _this = this
@@ -501,7 +509,9 @@ import { mapGetters  } from 'vuex'
         return uuid;
       },
       async saveData() {
-        const res = await saveFlow(Object.assign({...this.data},{username:this.userinfo.username}))
+        // this.data.lineList = []
+        // this.data.flowInfo = {}
+        const res = await saveFlow({flowInfo:[this.data.flowInfo],lineList:this.data.lineList,nodeList:this.data.nodeList,username:this.userinfo.username})
         this.getFlowInfo()
         this.$message.success(res.msg)
       },
