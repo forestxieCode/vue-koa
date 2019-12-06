@@ -19,7 +19,6 @@ service.interceptors.request.use(
     // config.headers['-Token'] = getToken()
     config.headers.Authorization = sessionStorage.getItem('token')
     
-    console.log(config)
     return config
   },
  
@@ -44,7 +43,6 @@ service.interceptors.response.use(
    */
   response => {
     const res = response.data //res is my own data
-
     if (res.code === 0) {
     // do somethings when response success
     //   Message({
@@ -55,6 +53,8 @@ service.interceptors.response.use(
       return res
     } else {
       // if the custom code is not 200000, it is judged as an error.
+      
+      
       Message({
         message: res.msg || 'Error',
         type: 'error',
@@ -64,12 +64,15 @@ service.interceptors.response.use(
     }
   },
   error => {
-    console.log('err' + error) // for debug
     Message({
       message: error.message,
       type: 'error',
       duration: 5 * 1000
     })
+    if(error.message === 'Request failed with status code 401'){
+      window.location.href="/"
+    }
+  
     return Promise.reject(error)
   }
 )

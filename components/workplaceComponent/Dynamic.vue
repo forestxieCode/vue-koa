@@ -1,14 +1,14 @@
 <template>
   <el-card class="dynamic" shadow="never">
     <div slot="header" class="clearfix">
-      <span>动态</span>
+      <span>最新留言</span>
     </div>
     <div v-for="(item,index) in dynamicArr" :key="index" class="dynamic-item">
       <div class="info">
-        <img :src="item.url"/>
+        <img :src="item.authorImg"/>
         <div>
-          <span>{{item.contect}}</span>
-          <span>{{item.updateTime}}</span>
+          <span>{{item.message}}</span>
+          <span>{{item.update_time}}</span>
         </div>
       </div>
       <el-divider></el-divider>
@@ -38,11 +38,30 @@
       updateTime:'2小时'
     }
   ]
+  const sortKey = (array, key) =>{
+        return array.sort(function(a, b) {
+          var x = a[key];
+          var y = b[key];
+          return x > y ? -1 : x < y ? 1 : 0;
+        });
+  }
+  import { getMessageList } from '~/api/users'
   export default {
     data(){
       return {
         dynamicArr
       }
+    },
+    methods:{
+      async getMessageList(){
+        let data =  await getMessageList()
+        sortKey(data.data, "update_time");
+        data.data = data.data.splice(0,4)
+        this.dynamicArr = data.data
+      }
+    },
+    mounted(){
+      this.getMessageList()
     }
   }
 </script>

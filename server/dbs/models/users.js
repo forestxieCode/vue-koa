@@ -1,4 +1,4 @@
-// users模型，包括四个字段
+// users模型
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const UserSchema = new Schema({

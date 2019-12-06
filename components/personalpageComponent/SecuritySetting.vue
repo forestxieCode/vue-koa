@@ -183,8 +183,6 @@ export default {
 <style lang="less">
 .security-setting{
     margin-top: 5px;
-    flex: 1;
-    height: 100%;
     .title{
         color: rgba(0,0,0,.85);
         font-size: 20px;

@@ -38,4 +38,14 @@ router.get('/get-user-info',checkToken,controllers.user.getUserInfo)
 //更新用户 密码 需要验证 token
 router.post('/update-passworld',checkToken,controllers.user.updatePassworld)
 
+//发布留言 需要验证 token
+router.post('/post-message',checkToken,controllers.user.postMessage)
+
+// 获取留言列表 
+router.get('/get-message-list',checkToken,controllers.user.getMessageList)
+
+// 删除留言
+router.get('/delete-message',checkToken,controllers.user.deleteMessage)
+
+
 module.exports = router

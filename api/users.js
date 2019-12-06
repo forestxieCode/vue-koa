@@ -20,6 +20,14 @@ export const getUserInfo = (data) => request.get('/get-user-info',{params:data})
 // 更新用户密码
 export const updatePassworld = (data) => request.post('/update-passworld',data)
 
+// 发布留言
+export const postMessage = (data) => request.post('/post-message',data)
+
+// 得到留言 列表
+export const getMessageList = (data) => request.get('/get-message-list',{params:data})
+
+// 删除留言
+export const deleteMessage = (data) => request.get('/delete-message',{params:data})
 
 
 

@@ -29,7 +29,7 @@
                 <span class="el-icon-switch-button"></span> 退出登入
               </div>
             <div class="info" slot="reference">
-              <img :src="userinfo.authorImg?userinfo.authorImg:'~/assets/img/avtor.jpg'" alt="" class="avtoer"> {{$t('global.welcome')}} {{username}}
+              <img :src="userinfo.authorImg?`${$config.fileApi}${userinfo.authorImg}`:`${$config.fileApi}/uploads/default_aveter.jpg`" alt="" class="avtoer"> {{$t('global.welcome')}} {{username}}
             </div>
           </el-popover>
         </div>
