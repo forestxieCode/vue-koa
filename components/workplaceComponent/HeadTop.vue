@@ -2,11 +2,11 @@
    <el-row class="workplace-head-top">
       <el-col :span="10" class="header-left">
         <div>
-          <img :src="userinfo.authorImg?userinfo.authorImg:'~/assets/img/avtor.jpg'" alt="" >
+          <img :src="userinfo.authorImg?`${$config.fileApi}${userinfo.authorImg}`:`${$config.fileApi}/uploads/default_aveter.jpg`" alt="" >
         </div>
         <div class="header-left-info">
             <div>{{getTimeText}}，{{username}}，要不要来一把LoL！</div>
-            <div>{{userinfo.nice}} | {{userinfo.desc}}</div>
+            <div>{{userinfo.nice?userinfo.nice:'暂无,快去设置下' }} | {{userinfo.desc?userinfo.desc:'暂无，快去设置下'}}</div>
         </div>
       </el-col>
         <el-col :span="14">

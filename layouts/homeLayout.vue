@@ -57,7 +57,8 @@ const hiddenObj = {
   '/home':true,
   '/graphiceditor':true,
   '/permission':true,
-  '/personalpage/personalsetting':true
+  '/personalpage/personalsetting':true,
+  '/personalpage/personalCenter':true
 }
 export default {
   loading:false,

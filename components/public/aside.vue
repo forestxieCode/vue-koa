@@ -53,6 +53,10 @@
             iconClass:'el-icon-user',
             path:'/personalpage',
             childe:[
+               {
+                name:'个人中心',
+                path:'/personalpage/personalCenter',
+              },
               {
                 name:'个人设置',
                 path:'/personalpage/personalsetting',
