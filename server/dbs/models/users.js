@@ -34,6 +34,10 @@ const UserSchema = new Schema({
   address:{
     type: String
   },
+  //个人项目
+  project:{
+    type:Array
+  },
   // 团队
   team:{
     type: Array

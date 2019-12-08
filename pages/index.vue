@@ -4,10 +4,10 @@
      <header>用户登入</header>
      <el-form :model="login_form" status-icon :rules="login_rules" ref="login_form" label-width="0" class="login_Form">
         <el-form-item prop="username">
-          <el-input type="username" v-model="login_form.username" auto-complete="off" placeholder="请输入账号邮箱" prefix-icon="el-icon-user" clearable></el-input>
+          <el-input type="username" v-model="login_form.username" auto-complete="off" placeholder="默认账号forest/或自己新注册" prefix-icon="el-icon-user" clearable></el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input type="password" v-model="login_form.password" auto-complete="off"  placeholder="请输入账号密码"  prefix-icon="el-icon-lock" clearable></el-input>
+          <el-input type="password" v-model="login_form.password" auto-complete="off"  placeholder="默认密码admin12/或自己新注册"  prefix-icon="el-icon-lock" clearable></el-input>
         </el-form-item>
 
          <div class="ContantSpanBetween">

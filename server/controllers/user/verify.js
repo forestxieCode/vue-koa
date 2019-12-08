@@ -51,7 +51,7 @@ module.exports = async (ctx,next) =>{
       from: `"认证邮件" <${Email.smtp.user}>`, // 邮件来自
       to: ko.email, // 邮件发往
       subject: '邀请码', // 邮件主题 标题
-      html: `您正在注册****，您的邀请码是${ko.code}` // 邮件内容
+      html: `您正在forest后台管理系统，您的邀请码是${ko.code}` // 邮件内容
     }
   
     // 执行发送邮件

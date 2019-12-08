@@ -29,5 +29,9 @@ export const getMessageList = (data) => request.get('/get-message-list',{params:
 // 删除留言
 export const deleteMessage = (data) => request.get('/delete-message',{params:data})
 
+// 保存自己的项目
+export const saveMyProject = (data) => request.post('/save-my-project',data)
+
+
 
 

@@ -2,19 +2,28 @@
     <section class="my-project-card" shadow="never">
     
      <el-row :gutter="20">
-         <el-col :span="8">
+                    <!--   projectName:'',
+    projectUrl:'',
+    projectDesc:'',
+    projectImg:'',
+    time:'' -->
+         <el-col :span="12" v-for="(item,index) in projectArr" :key="index">
+  
          <el-card :body-style="{ padding: '0px' }" >
-                <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+                <div class="image-box">
+                    <img src="../../assets/img/myproject/01.png" class="image">
+                </div>
                 <div style="padding: 14px;">
-                    <span>VUE</span>
+                    <span>{{item.projectName}}</span>
                     <div class="bottom clearfix">
-                    <time class="time">{{ currentDate }}</time>
-                    <el-button type="text" class="button">操作按钮</el-button>
+                    <time class="time">{{ item.time | formDateTime }}</time>
+                    <el-button type="text" class="button" @click="openWeb(item.projectUrl)">访问</el-button>
+                    <el-button type="text" class="button" @click="eidthPro(item)">编辑</el-button>
                     </div>
                 </div>
-                </el-card>
+        </el-card>
          </el-col>
-          <el-col :span="8">
+          <!-- <el-col :span="12">
               <el-card :body-style="{ padding: '0px' }" >
                 <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
                 <div style="padding: 14px;">
@@ -25,8 +34,8 @@
                     </div>
                 </div>
                 </el-card>
-         </el-col>
-          <el-col :span="8">
+         </el-col> -->
+          <!-- <el-col :span="12">
               <el-card :body-style="{ padding: '0px' }" >
                 <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
                 <div style="padding: 14px;">
@@ -37,10 +46,10 @@
                     </div>
                 </div>
                 </el-card>
-         </el-col>
+         </el-col> -->
      </el-row>
 
-    <el-row :gutter="20" style="margin-top:20px;">
+    <!-- <el-row :gutter="20" style="margin-top:20px;">
          <el-col :span="8">
               <el-card :body-style="{ padding: '0px' }" >
                 <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
@@ -77,22 +86,42 @@
                 </div>
                 </el-card>
          </el-col>
-     </el-row>
+     </el-row> -->
     
     
     </section> 
 
 </template>
 <script>
+import { mapGetters,mapMutations  } from 'vuex'
+const moment = require('moment')
 export default {
     data(){
         return {
-            projectList :[
-                {
-                    url:'https://forestxiecode.github.io/forestxieCoded.github.io'
-                }
-            ],
-            currentDate: new Date()
+            projectArr:[],
+        }
+    },
+    props:['eidtHadlePro'],
+    filters:{
+        formDateTime(time){
+             return moment(new Date(time[0])).format('YYYY-MM-DD') +'-' +moment(new Date(time[1])).format('YYYY-MM-DD')
+        }
+    },
+    computed:{
+     ...mapGetters([
+      'userinfo'
+     ])
+    },
+    mounted(){
+        this.projectArr = this.userinfo.project
+    },
+
+    methods:{
+        eidthPro(item){
+            this.$emit('eidtHadlePro',item)
+        },
+        openWeb(url){
+            window.open(url)
         }
     }
 }
@@ -119,14 +148,21 @@ export default {
     .button {
         padding: 0;
         float: right;
+        & ~{
+            margin-left: 20px;
+        }
     }
     .el-col:nth-child(4n){
         margin-top: 20px;
     }
 
-    .image {
+    .image-box{
         width: 100%;
-        display: block;
+        height: 320x;
+    }
+    .image {
+        height: 100%;
+        width: 100%;
     }
 
     .clearfix:before,

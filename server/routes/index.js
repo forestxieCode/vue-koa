@@ -53,5 +53,9 @@ router.post('/save-flow',checkToken,controllers.flow.saveFlow)
 //获取流程图的信息
 router.get('/get-flow-info',checkToken,controllers.flow.getFlowInfo)
 
+//保存自己的项目
+router.post('/save-my-project',checkToken,controllers.user.saveMyProject)
+
+
 
 module.exports = router

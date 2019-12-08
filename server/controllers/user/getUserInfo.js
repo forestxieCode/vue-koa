@@ -27,6 +27,7 @@ module.exports = async (ctx, next) => {
                 tags:doc.tags || [],
                 address:doc.address || '',
                 team:doc.team || [],
+                project:doc.project || [],
             }
          }
       }
