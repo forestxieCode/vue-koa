@@ -4,13 +4,13 @@
             <div class="avatar">
                 <img :src="userinfo.authorImg?`${$config.fileApi}${userinfo.authorImg}`:`${$config.fileApi}/uploads/default_aveter.jpg`" alt="">
             </div>
-            <div class="username">{{userinfo.username}} / {{userinfo.nice ? userinfo.nice :'暂无'}} </div>
+            <div class="username">{{userinfo.username}} / {{userinfo.nice ? userinfo.nice :'暂无,快去设置吧'}} </div>
             <div class="desc">{{userinfo.desc}}</div>
         </div>
         <div class="account-center-detail">
-            <p><i class="el-icon-suitcase"/>前端工程师</p>
-            <p><i class="el-icon-coordinate" /> xx公司 - 技术部 - 小小前端</p>
-            <p><i class="el-icon-location-outline"/>湖南省长沙市</p>
+            <p><i class="el-icon-suitcase"/>{{userinfo.job ? userinfo.job :'暂无,快去设置吧'}}</p>
+            <p><i class="el-icon-coordinate" />{{userinfo.jobDescription ? userinfo.jobDescription :'暂无,快去设置吧'}}</p>
+            <p><i class="el-icon-location-outline"/>{{userinfo.address ? userinfo.address :'暂无,快去设置吧'}}</p>
         </div>
         <el-divider></el-divider>
         
@@ -18,25 +18,13 @@
             <div class="title">标签</div>
             <el-tag
                 :key="tag"
-                v-for="tag in dynamicTags"
-                closable
+                v-for="tag in userinfo.tags"
                 type="info"
                 :size="mini"
                 :disable-transitions="false"
-                @close="handleClose(tag)">
+                >
                 {{tag}}
             </el-tag>
-            <el-input
-                class="input-new-tag"
-                v-if="inputVisible"
-                v-model="inputValue"
-                ref="saveTagInput"
-                size="small"
-                @keyup.enter.native="handleInputConfirm"
-                @blur="handleInputConfirm"
-                >
-            </el-input>
-            <el-button v-else class="button-new-tag" size="small" @click="showInput">新增</el-button>
         </div>
 
         <el-divider></el-divider>
@@ -44,13 +32,7 @@
         <div class="myteam">
             <div class="title">团队</div>
             <div class="tem-list">
-                <span><img src="../../assets/img/avtor.jpg" > 游戏团</span>
-                <span><img src="../../assets/img/avtor.jpg" >日常发呆</span>
-                <span><img src="../../assets/img/avtor.jpg" > 代码搬运工</span>
-                <span><img src="../../assets/img/avtor.jpg" >技术团</span>
-                <span><img src="../../assets/img/avtor.jpg" >阅读团</span>
-                <span><img src="../../assets/img/avtor.jpg" >自由职业</span>
-                <span><img src="../../assets/img/avtor.jpg" >看剧团</span>
+                <span v-for="item in userinfo.team" :key="item.teamName"><img :src="item.teamImg?`${$config.fileApi}${item.teamImg}`:`${$config.fileApi}/uploads/default_aveter.jpg`" >{{item.teamName}}</span>
             </div>
         </div>
     </el-card>
@@ -61,8 +43,6 @@ export default {
     data(){
         return {
             dynamicTags: ['帅气', '宅男控', '小前端','技术控'],
-            inputVisible: false,
-            inputValue: ''
         }
     },
     computed:{
@@ -71,25 +51,7 @@ export default {
      ])
     },
     methods:{
-     handleClose(tag) {
-        this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
-      },
 
-      showInput() {
-        this.inputVisible = true;
-        this.$nextTick(_ => {
-          this.$refs.saveTagInput.$refs.input.focus();
-        });
-      },
-
-      handleInputConfirm() {
-        let inputValue = this.inputValue;
-        if (inputValue) {
-          this.dynamicTags.push(inputValue);
-        }
-        this.inputVisible = false;
-        this.inputValue = '';
-      }
     }
 }
 </script>

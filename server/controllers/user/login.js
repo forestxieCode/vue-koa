@@ -35,7 +35,12 @@ module.exports = async (ctx, next) => {
           phone:doc.phone || '',
           nice:doc.nice || '',
           desc:doc.desc || '',
-          authorImg:doc.authorImg || ''
+          authorImg:doc.authorImg || '',
+          job:doc.job || '',
+          jobDescription:doc.jobDescription || '',
+          tags:doc.tags || [],
+          address:doc.address || '',
+          team:doc.team || [],
         }
       } catch (err) {
         ctx.body = {

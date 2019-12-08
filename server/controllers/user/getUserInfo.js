@@ -11,16 +11,22 @@ module.exports = async (ctx, next) => {
           msg: '没有查询到该用户'
         }
       } else {
+
         ctx.body = {
             code: 0,
             data: {
-                authorImg:doc.authorImg,
-                desc:doc.desc,
+                authorImg:doc.authorImg||'',
+                desc:doc.desc||'',
                 email:doc.email,
-                nice:doc.nice,
-                phone:doc.phone,
+                nice:doc.nice||'',
+                phone:doc.phone||'',
                 token:doc.token,
-                username:doc.username
+                username:doc.username, 
+                job:doc.job || '',
+                jobDescription:doc.jobDescription || '',
+                tags:doc.tags || [],
+                address:doc.address || '',
+                team:doc.team || [],
             }
          }
       }

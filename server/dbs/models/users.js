@@ -16,14 +16,36 @@ const UserSchema = new Schema({
     required: true
   },
   phone:{
-    type: String,
+    type: String
+  },
+  //职业
+  job:{
+    type: String
+  },
+  // 职业描述
+  jobDescription:{
+    type: String
+  },
+  // 个人标签
+  tags:{
+    type:Array
+  },
+  // 居住地址
+  address:{
+    type: String
+  },
+  // 团队
+  team:{
+    type: Array
   },
   nice:{
     type: String,
   },
+  //个人简介
   desc:{
     type: String,
   },
+  //头像
   authorImg:{
     type: String,
   },
