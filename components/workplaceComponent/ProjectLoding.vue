@@ -2,68 +2,78 @@
   <el-card class="box-card-project" shadow="never">
     <div slot="header" class="clearfix">
       <span>进行中的项目</span>
-      <el-button style="float: right; padding: 3px 0" type="text" >全部项目</el-button>
+      <el-button style="float: right; padding: 3px 0" type="text" @click="goMyproject">全部项目</el-button>
     </div>
-    <div v-for="(item,index) in ProectList" :key="index" class="box-card-project-item item">
+    <div v-for="(item,index) in userinfo.project" :key="index" class="box-card-project-item item">
       <div class="cardTitle">
-        <img :src="item.url" class="avatar" >
-        <a href="/">{{item.name}}</a>
+        <img :src="item.projectImg?`${$config.fileApi}${item.projectImg}`:`${$config.fileApi}/uploads/default_aveter.jpg`" class="avatar" >
+        <a :href="item.projectUrl">{{item.projectName}}</a>
       </div>
       <div class="description">
-        {{item.description}}
+        {{item.projectDesc}}
       </div>
       <div class="projectItemContent">
-        <a href="/">{{item.gropName}}</a>
-        <span >{{item.minus}}</span>
+        <a href="/">搬砖纵火组</a>
+        <span >14分钟</span>
       </div>
     </div>
   </el-card>
 </template>
 <script>
- const data=[
+ const mydata=[
     {
-        url:'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
-        name:'Alipay',
-        description:'那是一种内在的东西，他们到达不了，也无法触及的',
+        projectImg:'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
+        projectName:'Alipay',
+        projectDesc:'那是一种内在的东西，他们到达不了，也无法触及的',
         gropName:'科学搬砖组',
         minus:'14分钟前'
     },
    {
-     url:'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
-     name:'Alipay',
-     description:'那是一种内在的东西，他们到达不了，也无法触及的',
+     projectImg:'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
+     projectName:'Alipay',
+     projectDesc:'那是一种内在的东西，他们到达不了，也无法触及的',
      gropName:'科学搬砖组',
      minus:'14分钟前'
    },    {
-     url:'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
-     name:'Alipay',
-     description:'那是一种内在的东西，他们到达不了，也无法触及的',
+     projectImg:'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
+     projectName:'Alipay',
+     projectDesc:'那是一种内在的东西，他们到达不了，也无法触及的',
      gropName:'科学搬砖组',
      minus:'14分钟前'
    },    {
-     url:'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
-     name:'Alipay',
-     description:'那是一种内在的东西，他们到达不了，也无法触及的',
+     projectImg:'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
+     projectName:'Alipay',
+     projectDesc:'那是一种内在的东西，他们到达不了，也无法触及的',
      gropName:'科学搬砖组',
      minus:'14分钟前'
    },    {
-     url:'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
-     name:'Alipay',
-     description:'那是一种内在的东西，他们到达不了，也无法触及的',
+     projectImg:'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
+     projectName:'Alipay',
+     projectDesc:'那是一种内在的东西，他们到达不了，也无法触及的',
      gropName:'科学搬砖组',
      minus:'14分钟前'
    },    {
-     url:'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
-     name:'Alipay',
-     description:'那是一种内在的东西，他们到达不了，也无法触及的',
+     projectImg:'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
+     projectName:'Alipay',
+     projectDesc:'那是一种内在的东西，他们到达不了，也无法触及的',
      gropName:'科学搬砖组',
      minus:'14分钟前'
    }
   ]
+import { mapGetters,mapMutations  } from 'vuex'
 export default {
-  data(){
-    return {
-      ProectList:data
+  computed:{
+     ...mapGetters([
+      'userinfo'
+     ]),
+     allProject(){
+        userinfo.project.length>6?userinfo.project.splice(0,6):userinfo.project
+        return [...mydata.splice(0,(mydata.length - userinfo.project.length)),...userinfo.project.length]
+     }
+  },
+  methods:{
+    goMyproject(){
+      this.$router.push('/personalpage/personalCenter')
     }
   }
 }

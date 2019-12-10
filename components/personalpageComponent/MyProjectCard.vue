@@ -1,15 +1,8 @@
 <template>
     <section class="my-project-card" shadow="never">
-    
      <el-row :gutter="20">
-                    <!--   projectName:'',
-    projectUrl:'',
-    projectDesc:'',
-    projectImg:'',
-    time:'' -->
-         <el-col :span="12" v-for="(item,index) in projectArr" :key="index">
-  
-         <el-card :body-style="{ padding: '0px' }" >
+         <el-col :span="12" v-for="(item,index) in projectArr" :key="index" style="margin-top:15px;"> 
+         <el-card :body-style="{ padding: '0px' }"  >
                 <div class="image-box">
                     <img src="../../assets/img/myproject/01.png" class="image">
                 </div>
@@ -23,72 +16,7 @@
                 </div>
         </el-card>
          </el-col>
-          <!-- <el-col :span="12">
-              <el-card :body-style="{ padding: '0px' }" >
-                <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
-                <div style="padding: 14px;">
-                    <span>React</span>
-                    <div class="bottom clearfix">
-                    <time class="time">{{ currentDate }}</time>
-                    <el-button type="text" class="button">操作按钮</el-button>
-                    </div>
-                </div>
-                </el-card>
-         </el-col> -->
-          <!-- <el-col :span="12">
-              <el-card :body-style="{ padding: '0px' }" >
-                <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
-                <div style="padding: 14px;">
-                    <span>Taro</span>
-                    <div class="bottom clearfix">
-                    <time class="time">{{ currentDate }}</time>
-                    <el-button type="text" class="button">操作按钮</el-button>
-                    </div>
-                </div>
-                </el-card>
-         </el-col> -->
      </el-row>
-
-    <!-- <el-row :gutter="20" style="margin-top:20px;">
-         <el-col :span="8">
-              <el-card :body-style="{ padding: '0px' }" >
-                <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
-                <div style="padding: 14px;">
-                    <span>Nuxt</span>
-                    <div class="bottom clearfix">
-                    <time class="time">{{ currentDate }}</time>
-                    <el-button type="text" class="button">操作按钮</el-button>
-                    </div>
-                </div>
-                </el-card>
-         </el-col>
-          <el-col :span="8">
-              <el-card :body-style="{ padding: '0px' }" >
-                <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
-                <div style="padding: 14px;">
-                    <span>Koa</span>
-                    <div class="bottom clearfix">
-                    <time class="time">{{ currentDate }}</time>
-                    <el-button type="text" class="button">操作按钮</el-button>
-                    </div>
-                </div>
-                </el-card>
-         </el-col>
-          <el-col :span="8">
-              <el-card :body-style="{ padding: '0px' }" >
-                <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
-                <div style="padding: 14px;">
-                    <span>好吃的汉堡</span>
-                    <div class="bottom clearfix">
-                    <time class="time">{{ currentDate }}</time>
-                    <el-button type="text" class="button">操作按钮</el-button>
-                    </div>
-                </div>
-                </el-card>
-         </el-col>
-     </el-row> -->
-    
-    
     </section> 
 
 </template>

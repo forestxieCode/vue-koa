@@ -12,7 +12,7 @@
             </el-tabs>
        </el-card>
 
-       <el-dialog title="新增项目" :visible.sync="addProjectVisible" width="35%">
+       <el-dialog :title="title +'项目'" :visible.sync="addProjectVisible" width="35%">
               <el-form label-width="80px" :model="fromProject" ref="fromEmail">
                 <el-row :gutter="20">
                     <el-col :span="18">
@@ -48,7 +48,7 @@
 
              <div slot="footer">
                  <el-button @click="addProjectVisible = false" class="my-btn my-btn-default" >取消</el-button>
-                 <el-button @click="addProject" class="my-btn my-btn-primary">添加</el-button>
+                 <el-button @click="addProject" class="my-btn my-btn-primary">保存</el-button>
              </div>
        </el-dialog>
   </section>
@@ -66,7 +66,8 @@ const initfromProject = ()=>{
     projectUrl:'',
     projectDesc:'',
     projectImg:'',
-    time:''
+    time:'',
+    title:'新增'
   }
 } 
 export default {
@@ -74,7 +75,8 @@ export default {
       return {
         activeName: 'first',
         fromProject:initfromProject(),
-        addProjectVisible:false
+        addProjectVisible:false,
+        temData:[]
       };
     },
     components:{
@@ -83,15 +85,16 @@ export default {
     },
     computed:{
      ...mapGetters([
-      'userinfo'
+      'userinfo',
+      'username'
      ])
     },
   
     methods: {
       eidtHadlePro(pro){
-        console.log(pro)
         this.addProjectVisible = true
         this.fromProject = pro
+        this.title = '编辑'
      },
       handleClick(tab, event) {
         console.log(tab, event);
@@ -100,10 +103,8 @@ export default {
         'saveUserInfo'
       ]),
      async addProject(){
-        const temData = [...this.userinfo.project,this.fromProject]
-        const res =  await saveMyProject({project:temData,username:this.userinfo.username})
-       
-        const userRes = await getUserInfo({username:this.userinfo.username})
+        const res =  await saveMyProject({project:this.fromProject,username:this.userinfo.username})
+        const userRes = await getUserInfo({username:this.username})
         if(userRes.code===0){
             this.saveUserInfo(userRes.data)
         }
@@ -112,8 +113,12 @@ export default {
       },
       clickHandle(){
         this.addProjectVisible = true
+        this.title = '新增'
         this.fromProject = initfromProject()
       }
+    },
+    mounted(){
+      this.temData = [...this.userinfo.project]
     }
 }
 </script>

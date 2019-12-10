@@ -13,11 +13,11 @@
            <div class="header-right">
              <div class="item">
                <div>项目数量</div>
-               <div>56</div>
+               <div>{{userinfo.project.length}}</div>
              </div>
              <div class="item">
                <div>团队内排名</div>
-               <div>8/ 24</div>
+               <div>{{userinfo.project.length}} / 100</div>
              </div>
              <div class="item">
                <div>项目访问</div>
