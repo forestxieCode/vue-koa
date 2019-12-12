@@ -4,7 +4,7 @@
          <el-col :span="12" v-for="(item,index) in projectArr" :key="index" style="margin-top:15px;"> 
          <el-card :body-style="{ padding: '0px' }"  >
                 <div class="image-box">
-                    <img src="../../assets/img/myproject/01.png" class="image">
+                    <img :src="item.projectImg?`${$config.fileApi}${item.projectImg}`:`${$config.fileApi}/uploads/01.png`" class="image">
                 </div>
                 <div style="padding: 14px;">
                     <span>{{item.projectName}}</span>

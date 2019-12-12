@@ -4,7 +4,7 @@
       <span>进行中的项目</span>
       <el-button style="float: right; padding: 3px 0" type="text" @click="goMyproject">全部项目</el-button>
     </div>
-    <div v-for="(item,index) in userinfo.project" :key="index" class="box-card-project-item item">
+    <div v-for="(item,index) in projectArr" :key="index" class="box-card-project-item item">
       <div class="cardTitle">
         <img :src="item.projectImg?`${$config.fileApi}${item.projectImg}`:`${$config.fileApi}/uploads/default_aveter.jpg`" class="avatar" >
         <a :href="item.projectUrl">{{item.projectName}}</a>
@@ -65,16 +65,38 @@ export default {
   computed:{
      ...mapGetters([
       'userinfo'
-     ]),
-     allProject(){
-        userinfo.project.length>6?userinfo.project.splice(0,6):userinfo.project
-        return [...mydata.splice(0,(mydata.length - userinfo.project.length)),...userinfo.project.length]
-     }
+     ])
+  },
+
+  data(){
+    return {
+      projectArr:[]
+    }
+  },
+ watch: {
+  $route: {
+    handler: function(val, oldVal){
+        console.log(1212);
+      },
+      // 深度观察监听
+      deep: true
+    }
   },
   methods:{
     goMyproject(){
       this.$router.push('/personalpage/personalCenter')
+    },
+    allProject(){
+        let tem = [...this.userinfo.project]
+        let tem2 = [...mydata]
+        if(tem.length>6){
+          tem = tem.splice(0,6)
+        }
+        return [...tem,...tem2.splice(1,(mydata.length - tem.length))]
     }
+  },
+  mounted(){
+    this.projectArr =  [...this.allProject()]  
   }
 }
 </script>

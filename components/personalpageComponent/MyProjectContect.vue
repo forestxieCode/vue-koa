@@ -66,8 +66,7 @@ const initfromProject = ()=>{
     projectUrl:'',
     projectDesc:'',
     projectImg:'',
-    time:'',
-    title:'新增'
+    time:''
   }
 } 
 export default {
@@ -76,7 +75,8 @@ export default {
         activeName: 'first',
         fromProject:initfromProject(),
         addProjectVisible:false,
-        temData:[]
+        temData:[],
+        title:'新增'
       };
     },
     components:{
