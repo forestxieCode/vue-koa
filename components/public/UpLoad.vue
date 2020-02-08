@@ -6,7 +6,8 @@
          :headers="myToken"
          with-credentials
          name="file"
-         action="/api/upload" 
+         action=""
+         :http-request="upload"
          :on-error="uploadError"
          :on-success="handleAvatarSuccess"
          :before-upload="beforeAvatarUpload"
@@ -45,6 +46,19 @@ export default {
       uploadError() {
           this.$message.error('上传失败，请重新上传')
       },
+      upload(e){
+        let formData = new FormData();
+        formData.append('file',e.file)
+        this.$axios.post('/api/upload',formData,{
+            'Content-Type':'multipart/form-data'
+        }).then(res=>{
+            if(res.status === 200){
+                this.$message.success('上传成功')
+                this.imgUrl = res.data.filename
+                this.$emit('update:authorImg',res.data.filename)
+            }
+        })
+      },
       beforeAvatarUpload(file) {
           const fileType = ['image/gif','image/jpeg','image/jpg','image/png','image/svg']
           const isLt2M = file.size / 1024 / 1024 < 2;
@@ -59,8 +73,8 @@ export default {
           }   
       },
      handleAvatarSuccess(res, file) {
-         this.imgUrl = res.filename
-         this.$emit('update:authorImg',res.filename)
+        //  this.imgUrl = res.filename
+        //  this.$emit('update:authorImg',res.filename)
      },
     },
 }

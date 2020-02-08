@@ -4,7 +4,7 @@ export default function({ $axios, redirect }) {
         const res = response.data //res is my own data
         if (res.code === 0) {
             return res
-        } else {
+        } else if(response.config.url!=='/api/api/upload') {
             Message({
                 message: res.msg || 'Error',
                 type: 'error',
