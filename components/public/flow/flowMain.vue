@@ -53,7 +53,7 @@ import flowNode from './flowNode.vue'
 import editFlow from './editFlow.vue'
 import editNode from './editNode.vue'
 import editLine from './editLine.vue'
-import { saveFlow,getFlowInfo } from '~/api/flow'
+// import { saveFlow,getFlowInfo } from '~/api/flow'
 import { mapGetters  } from 'vuex'
   export default {
     name: 'flowMain',
@@ -206,7 +206,7 @@ import { mapGetters  } from 'vuex'
     },
     methods: {
       async getFlowInfo(){
-        const res =  await getFlowInfo({username:this.userinfo.username})
+        const res =  await this.$axios.get('/api/get-flow-info',{params:{username:this.userinfo.username}})
         if(res.data.flowInfo.length){
           this.data.lineList = res.data.lineList
           this.data.flowInfo = res.data.flowInfo[0]
@@ -511,7 +511,7 @@ import { mapGetters  } from 'vuex'
       async saveData() {
         // this.data.lineList = []
         // this.data.flowInfo = {}
-        const res = await saveFlow({flowInfo:[this.data.flowInfo],lineList:this.data.lineList,nodeList:this.data.nodeList,username:this.userinfo.username})
+        const res = await this.$axios.post('/api/save-flow',{flowInfo:[this.data.flowInfo],lineList:this.data.lineList,nodeList:this.data.nodeList,username:this.userinfo.username})
         this.getFlowInfo()
         this.$message.success(res.msg)
       },

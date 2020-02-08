@@ -57,7 +57,6 @@
 <script>
 import { mapGetters,mapMutations  } from 'vuex'
 import MyProjectCard from './MyProjectCard'
-import { saveMyProject,getUserInfo } from '~/api/users'
 
 import  UpLoad  from '~/components/public/UpLoad'
 const initfromProject = ()=>{
@@ -103,8 +102,8 @@ export default {
         'saveUserInfo'
       ]),
      async addProject(){
-        const res =  await saveMyProject({project:this.fromProject,username:this.userinfo.username})
-        const userRes = await getUserInfo({username:this.username})
+        const res =  await this.$axios.post('/api/save-my-project',{project:this.fromProject,username:this.userinfo.username})
+        const userRes = await this.$axios.get('/api/get-user-info',{params:{username:this.username}})
         if(userRes.code===0){
             this.saveUserInfo(userRes.data)
         }

@@ -14,7 +14,7 @@
         <div v-for="(item,index) in dynamicArr" :key="index" class="dynamic-item">
             <div class="info">
                 <div class="left">
-                     <img :src="item.authorImg"/>
+                     <img :src="`${$config.fileApi}${item.authorImg}`"/>
                     <div>
                         <span>{{item.message}}</span>
                         <span>{{item.update_time}}</span>
@@ -27,7 +27,6 @@
     </section>
 </template>
 <script>
-import { postMessage,getMessageList,deleteMessage } from '~/api/users'
 import { mapGetters,mapMutations  } from 'vuex'
   const sortKey = (array, key) =>{
         return array.sort(function(a, b) {
@@ -51,7 +50,7 @@ export default {
     methods:{
         async submitForm(){
           this.formData.username = this.userinfo.username
-          const res =  await postMessage(this.formData)
+          const res =  await this.$axios.post('/api/post-message',this.formData)
           if(res.code === 0){
               this.$message.success(res.msg)
               this.formData.message = ''
@@ -61,17 +60,17 @@ export default {
           }
         },
         async getMessageList(){
-            const data =  await getMessageList({username:this.userinfo.username})
+            const data =  await this.$axios.get('/api/get-message-list',{params:{username:this.userinfo.username}})
             this.dynamicArr = data.data
             sortKey(this.dynamicArr,'update_time')
         },
-         deleteMessage(update_time){
+        deleteMessage(update_time){
           this.$confirm('此操作将永久删除, 是否继续?', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
                 type: 'warning'
             }).then(async  () => {
-                const res =  await deleteMessage({update_time})
+                const res =  await this.$axios.get('/api/delete-message',{params:{update_time}})
                 if(res.code === 0){
                     this.$message({
                         type: 'success',

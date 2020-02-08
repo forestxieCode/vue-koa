@@ -5,7 +5,7 @@
     </div>
     <div v-for="(item,index) in dynamicArr" :key="index" class="dynamic-item">
       <div class="info">
-        <img :src="item.authorImg"/>
+        <img :src="`${$config.fileApi}${item.authorImg}`"/>
         <div>
           <span>{{item.message}}</span>
           <span>{{item.update_time}}</span>
@@ -45,7 +45,6 @@ const dynamicArr = [
           return x > y ? -1 : x < y ? 1 : 0;
         });
   }
-  import { getMessageList } from '~/api/users'
   export default {
     data(){
       return {
@@ -54,7 +53,7 @@ const dynamicArr = [
     },
     methods:{
       async getMessageList(){
-        let data =  await getMessageList()
+        let data = await this.$axios.get('/api/get-message-list')
         sortKey(data.data, "update_time");
         data.data = data.data.splice(0,4)
         this.dynamicArr = data.data

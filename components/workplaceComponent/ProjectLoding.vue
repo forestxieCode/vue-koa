@@ -22,38 +22,32 @@
 <script>
  const mydata=[
     {
-        projectImg:'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
         projectName:'Alipay',
         projectDesc:'那是一种内在的东西，他们到达不了，也无法触及的',
         gropName:'科学搬砖组',
         minus:'14分钟前'
     },
    {
-     projectImg:'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
      projectName:'Alipay',
      projectDesc:'那是一种内在的东西，他们到达不了，也无法触及的',
      gropName:'科学搬砖组',
      minus:'14分钟前'
    },    {
-     projectImg:'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
      projectName:'Alipay',
      projectDesc:'那是一种内在的东西，他们到达不了，也无法触及的',
      gropName:'科学搬砖组',
      minus:'14分钟前'
    },    {
-     projectImg:'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
      projectName:'Alipay',
      projectDesc:'那是一种内在的东西，他们到达不了，也无法触及的',
      gropName:'科学搬砖组',
      minus:'14分钟前'
    },    {
-     projectImg:'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
      projectName:'Alipay',
      projectDesc:'那是一种内在的东西，他们到达不了，也无法触及的',
      gropName:'科学搬砖组',
      minus:'14分钟前'
    },    {
-     projectImg:'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
      projectName:'Alipay',
      projectDesc:'那是一种内在的东西，他们到达不了，也无法触及的',
      gropName:'科学搬砖组',
@@ -72,8 +66,13 @@ export default {
         if(tem.length>6){
           tem = tem.splice(0,6)
         }
-        return [...tem,...tem2.splice(1,(mydata.length - tem.length))]
+        return [...tem,...tem2.splice(0,(mydata.length - tem.length))]
     }  
+  },
+  methods:{
+    goMyproject(){
+
+    }
   }
 }
 </script>

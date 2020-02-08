@@ -4,10 +4,10 @@
      <header>注册新账号</header>
      <el-form :model="register_form" status-icon :rules="register_rules" ref="register_form" label-width="0" class="register_Form">
         <el-form-item prop="username">
-          <el-input type="text" v-model="register_form.username" auto-complete="off" placeholder="请输入注册账号" clearable></el-input>
+          <el-input type="text" v-model="register_form.username" auto-complete="off" placeholder="请输入注册账号" clearable :disabled="isGeting"></el-input>
         </el-form-item>
         <el-form-item prop="email">
-          <el-input type="email" v-model="register_form.email" auto-complete="off" placeholder="请输入注册邮箱" clearable></el-input>
+          <el-input type="email" v-model="register_form.email" auto-complete="off" placeholder="请输入注册邮箱" clearable :disabled="isGeting"></el-input>
         </el-form-item>
         <el-form-item prop="password">
           <el-input type="password" v-model="register_form.password" auto-complete="off"  placeholder="请输入注册密码" clearable></el-input>
@@ -19,7 +19,7 @@
         <el-form-item prop="code" >
            <div class="ContantSpanBetween">
             <el-input type="code" v-model="register_form.code" auto-complete="off"  placeholder="请输入验证码" style="width:60%;"></el-input>
-            <el-button type="primary" @click="sendCode" style="width:36%;" :loading="isLoading" :disabled="isDisabled">获取验证码</el-button>
+            <el-button type="primary" @click="getVerifyCode" style="width:36%;" :loading="isLoading" :disabled="isDisabled">{{getCode}}</el-button>
            </div>
         </el-form-item>
 
@@ -35,7 +35,6 @@
 </template>
 
 <script>
-import { sendVerify , register } from '~/api/users.js'
 export default {
   layout:"default",
   data(){
@@ -72,6 +71,9 @@ export default {
     };
 
     return {
+      count:300,
+      getCode:'获取验证码',
+      isGeting:false,
       register_form:{
         email:'',
         username:'',
@@ -112,7 +114,7 @@ export default {
          let request = {...this.register_form}
          delete request.repassword
          if (!valid) return
-         register(request).then(res=>{
+         this.$axios.post('/api/register',request).then(res=>{
             if(res.code===0){
               this.$message.success(res.msg)
               setTimeout(()=>{
@@ -122,9 +124,27 @@ export default {
           })
       });
     },
+    getVerifyCode(){
+      if(!this.isGeting){
+        this.sendCode()
+      }
+      var countDown = setInterval(()=>{
+        if(this.count < 1){
+          this.isGeting = false
+          this.isLoading = false;
+          this.getCode = '获取验证码';
+          this.count = 6;
+          clearInterval(countDown);
+        }else{
+          this.isGeting = true
+          this.isLoading = true;
+          this.getCode = this.count-- + 's后重发';
+        }
+      },1000);
+    },
     sendCode(){
       this.isLoading = true
-      sendVerify({username:this.register_form.username,email:this.register_form.email}).then(res=>{
+      this.$axios.post('/api/verify',{username:this.register_form.username,email:this.register_form.email}).then(res=>{
         if(res.code===0){
           this.$message.success(res.msg)
         }else {
@@ -141,12 +161,13 @@ export default {
   height: 100vh;
   align-items: center;
   justify-content: center;
+  background: url('../assets/img/bg.jpg') no-repeat;
   // background: url(../assets/img/bg.jpg) no-repeat center center;
   .register_container{
     width: 368px;
     header{
       font-size: 33px;
-      color: rgba(0,0,0,.85);
+      color: #fff;
       font-family: Avenir,Helvetica Neue,Arial,Helvetica,sans-serif;
       font-weight: 600;
       position: relative;

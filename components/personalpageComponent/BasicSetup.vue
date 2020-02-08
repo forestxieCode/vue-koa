@@ -116,7 +116,6 @@
 </template>
 <script>
 import { mapGetters,mapMutations  } from 'vuex'
-import { updateUserInfo,getUserInfo } from '~/api/users'
 import  UpLoad  from '~/components/public/UpLoad'
 const initfrom = ()=> { return {teamName:'',teamImg:'',teamdesc:''}}
 
@@ -142,9 +141,9 @@ export default {
         async submitForm(){
             let userinfo = {...this.formData}
             delete userinfo.token; delete userinfo.email
-            const res =  await updateUserInfo(userinfo)
+            const res =  await this.$axios.post('/api/update-user-info',userinfo)
             if(res.code === 0){
-                const userRes = await getUserInfo({username:this.username})
+                const userRes = await this.$axios.get('/api/get-user-info',{params:{username:this.username}})
                 if(userRes.code===0){
                     this.saveUserInfo(userRes.data)
                 }

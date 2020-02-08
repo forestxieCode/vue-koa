@@ -90,7 +90,6 @@
 </template>
 <script>
 import { mapGetters,mapMutations  } from 'vuex'
-import { updatePassworld } from '~/api/users'
 export default {
     data(){
        const validaterePass= (rule, value, callback) => {
@@ -162,7 +161,7 @@ export default {
             this.$refs[formName].validate(async (valid) => {
                 if (!valid) return
                     const {newPassword,oldPassword} = this.formPassData
-                    let res = await updatePassworld({username:this.userinfo.username,newPassword,oldPassword})
+                    let res = await this.$axios.post('/api/update-passworld',{username:this.userinfo.username,newPassword,oldPassword})
                     if(res.code===0){
                         this.$message.success(res.msg)
                         this.eidtPassdialogVisible = false

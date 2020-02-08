@@ -1,76 +1,42 @@
 const Koa = require('koa')
+const consola = require('consola')
+const { Nuxt, Builder } = require('nuxt')
+
 const app = new Koa()
 
-const json = require('koa-json')
+// Import and Set Nuxt.js options
+const config = require('../nuxt.config.js')
+config.dev = app.env !== 'production'
 
-const onerror = require('koa-onerror')
-const bodyparser = require('koa-bodyparser')
-const logger = require('koa-logger')
-const start = require('./bli/www')
-const index = require('./routes/index')
+async function start () {
+  // Instantiate nuxt.js
+  const nuxt = new Nuxt(config)
 
-const mongoose = require('mongoose')
-const session = require('koa-generic-session')
-const Redis = require('koa-redis')
+  const {
+    host = process.env.HOST || '127.0.0.1',
+    port = process.env.PORT || 3000
+  } = nuxt.options.server
 
-const dbConfig = require('./dbs/config')
+  // Build in development
+  if (config.dev) {
+    const builder = new Builder(nuxt)
+    await builder.build()
+  } else {
+    await nuxt.ready()
+  }
 
-// 一些session和redis相关配置
-app.keys = ['keys', 'keyskeys']
-app.proxy = true
-app.use(
-  session({ 
-    store: new Redis()
+  app.use((ctx) => {
+    ctx.status = 200
+    ctx.respond = false // Bypass Koa's built-in response handling
+    ctx.req.ctx = ctx // This might be useful later on, e.g. in nuxtServerInit or with nuxt-stash
+    nuxt.render(ctx.req, ctx.res)
   })
-)
 
-app.use(require('koa-static')(__dirname + '/public'))
+  app.listen(port, host)
+  consola.ready({
+    message: `Server listening on http://${host}:${port}`,
+    badge: true
+  })
+}
 
-// error handler
-onerror(app)
-
-// middlewares
-app.use(bodyparser({
-  enableTypes:['json', 'form', 'text']
-}))
-app.use(json())
-
-// 连接数据库
-mongoose.connect(
-  dbConfig.dbs,
-  { useNewUrlParser: true }
-)
-mongoose.set('useNewUrlParser', true)
-mongoose.set('useFindAndModify', false)
-mongoose.set('useCreateIndex', true)
-
-const db = mongoose.connection
-mongoose.Promise = global.Promise // 防止Mongoose: mpromise 错误
-
-db.on('error', function () {
-    console.log('数据库连接出错')
-})
-
-db.on('open', function () {
-    console.log('数据库连接成功')
-})
-
-app.use(logger())
-
-// logger
-app.use(async (ctx, next) => {
-  const start = new Date()
-  await next()
-  const ms = new Date() - start
-  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
-})
-
-// routes
-app.use(index.routes(), index.allowedMethods())
-
-// error-handling
-app.on('error', (err, ctx) => {
-  console.error('server error', err, ctx)
-});
-
-start(app)
+start()

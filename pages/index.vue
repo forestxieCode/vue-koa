@@ -30,7 +30,6 @@
 
 <script>
 import { mapMutations } from 'vuex'
-import { login } from '~/api/users'
 export default {
   // loading: false,
   asyncData (){
@@ -65,7 +64,7 @@ export default {
        this.$refs[formName].validate(async (valid) => {
          if (!valid) return
          this.$nuxt.$loading.start()
-         let res = await login(this.login_form)
+         let res = await this.$axios.post('/api/login',this.login_form)
          if(res.code===0){
            this.$nuxt.$loading.finish()
            let info = {...res};delete info.code;delete info.msg
@@ -85,11 +84,12 @@ export default {
   height: 100vh;
   align-items: center;
   justify-content: center;
+  background: url('../assets/img/bg.jpg') no-repeat;
   .login_container{
     width: 368px;
     header{
       font-size: 33px;
-      color: rgba(0,0,0,.85);
+      color: #fff;
       font-family: Avenir,Helvetica Neue,Arial,Helvetica,sans-serif;
       font-weight: 600;
       position: relative;
@@ -106,9 +106,13 @@ export default {
       justify-content: space-between;
       margin-bottom: 20px;
       font-size: 14px;
+      color: #fff;
       a{
         text-decoration: none;
         color: #1890ff;
+      }
+      .el-checkbox{
+        color: #fff;
       }
       &:last-child{
         margin-bottom: 0px;
