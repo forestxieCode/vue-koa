@@ -1,6 +1,6 @@
 # Tale Blog
 
-![01.png](https://github.com/forestxieCode/static/blob/master/vue-koa/01.png?raw=true)
+![01.png](https://i.loli.net/2020/02/08/6SVhEBOv9qXIaxd.png)
 
 
 `Tale` 框架使用nuxt+koa 实现的 后台系统 ，现功能项虽少，但实际项目的基本都具有，如果觉得可以 请记得 给个start啊 。感谢 [star]((https://github.com/forestxieCode/vue-koa)).
@@ -27,4 +27,4 @@ demo website：http://47.94.23.173
 
 ## 联系方式
 
-![4.png](https://i.loli.net/2020/02/08/am8QfhD7cloTXyI.png)
+![connect.jpg](https://i.loli.net/2020/02/08/iSL473jy58TUEGJ.jpg)
