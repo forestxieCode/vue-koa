@@ -1,6 +1,6 @@
 <template>
   <section class="permission">
-      
+    正在建设中...
   </section>
 </template>
 <script>
@@ -19,6 +19,8 @@ export default {
   display: block;
   -webkit-box-flex: 1;
   flex: 1;
+  align-items: center;
+  text-align: center;
   flex-basis: auto;
   overflow: auto;
 }
